@@ -87,6 +87,11 @@
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>
+                            <td>Get all Questions</td>
+                            <td>{{ url('/') }}/api/questions</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
                             <td>Get single Question</td>
                             <td>{{ url('/') }}/api/question/{id}</td>
                             <td><span class="label label-success">GET</span></td>

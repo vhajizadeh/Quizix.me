@@ -36,7 +36,7 @@ class PagesController extends Controller
     }
 
     public function apiShowSingleCategoryQuestion($id){
-        $questions = Category::findorfail($id)->question()->get();
+        $questions = Category::findorfail($id)->question()->where('status', 1)->get();
         return $questions;
     }
 
