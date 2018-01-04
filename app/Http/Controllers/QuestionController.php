@@ -48,6 +48,8 @@ class QuestionController extends Controller
         ]);
 
         $data = $request->all(); 
+        $data['answer'] = $data[$data['answer']];
+
         $question = new Question($data);        
         $question->save();
 
@@ -98,6 +100,7 @@ class QuestionController extends Controller
 
         $question = Question::findorfail($id);
         $data = $request->all();
+        $data['answer'] = $data[$data['answer']];
         
         $question->update($data);        
         return redirect('admin/question')->withType('success')->withMessage('Question Updated');

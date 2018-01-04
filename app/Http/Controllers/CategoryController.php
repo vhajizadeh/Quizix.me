@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('question')->orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('id', 'DESC')->paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 

@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('answer', 'Correct Answer'); !!}
-            {!! Form::text('answer', null, ['class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
+            {!! Form::select('answer', ['choice_a' => 'Choice A', 'choice_b' => 'Choice B', 'choice_c' => 'Choice C', 'choice_d' => 'Choice D'], null, ['class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
         </div>
     </div>
 

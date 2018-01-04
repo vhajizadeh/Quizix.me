@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Question;
+use Route;
 
 class PagesController extends Controller
 {
@@ -26,7 +27,11 @@ class PagesController extends Controller
     }
 
     public function apiShowCategories(){
-        $categories = Category::withCount('question')->orderBy('title', 'ASC')->where('status', 1)->get();
+        $request = Route::getCurrentRequest();
+        $request->headers->set('al', 'b');
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('title', 'ASC')->where('status', 1)->get();
         return $categories;
     }
 
