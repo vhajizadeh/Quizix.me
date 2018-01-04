@@ -22,7 +22,7 @@
             </div>
          </div>
       </div>
-      <div class="col-md-3">
+{{--       <div class="col-md-3">
          <div class="sm-st clearfix">
             <span class="sm-st-icon st-green"><i class="fa fa-star"></i></span>
             <div class="sm-st-info">
@@ -39,7 +39,7 @@
                Countdown Timer
             </div>
          </div>
-      </div>
+      </div> --}}
    </div>
    <!-- Main row -->
    <div class="row">
@@ -103,7 +103,13 @@
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $question->title }}</td>
-                            <td>{{ $question->category->title }}</td>  
+                            <td>
+                                @if($question->category)
+                                    {{ $question->category->title }}
+                                @else
+                                    {{ "N/A" }}
+                                @endif                                
+                            </td>  
                             <td>{{ $question->choice_a }}</td> 
                             <td>{{ $question->choice_b }}</td>  
                             <td>{{ $question->choice_c }}</td>  

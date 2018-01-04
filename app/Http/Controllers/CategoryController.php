@@ -122,6 +122,7 @@ class CategoryController extends Controller
     {
         $category = Category::findorfail($id);
         $category->destroy($id);
+        $category->question()->update(['status' => 0]);
         return redirect('admin/category')->withType('danger')->withMessage('Category Deleted');
     }    
 

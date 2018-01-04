@@ -14,7 +14,7 @@
         </div>
     </div>      
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-2">
 	        <div class="stat">
 	            <div class="stat-icon" style="color:#fa8564;">
@@ -55,7 +55,7 @@
 	            <h5 class="stat-info">AdMob- <strong>On</strong></h5>
 	        </div>
 	    </div>
-	</div>  
+	</div>   --}}
 
 	<div class="row">
         <div class="col-xs-6">

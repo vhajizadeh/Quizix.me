@@ -36,6 +36,7 @@
                             <th>SL</th>
                             <th>Title</th> 
                             <th>Quetions</th>
+                            <th>Thumbnail</th>
                             <th>Added On</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -45,6 +46,11 @@
                             <td>{{ ++$key }}</td>
                             <td>{{ $category->title }}</td>  
                             <td>{{ $category->question_count }}</td>
+                            <td>
+                                @if($category->thumbnail)
+                                    <img src="{{ '../uploads/category/' . $category->thumbnail }}" alt="{{ $category->title }}" class="img-responsive" style="max-width: 100px !important;height: auto;" />
+                                @endif
+                            </td>
                             <td>{{ $category->created_at->diffForHumans() }}</td>
                             <td>{!! $category->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>
                             <td>
