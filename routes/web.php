@@ -24,18 +24,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function() {
     Route::get('setting', 'PagesController@settings')->name('setting');
     Route::get('profile', 'PagesController@profile')->name('profile');
 
-    // Dummy
-    Route::get('form', function () {
-        return view('admin.form');
-    });
-    Route::get('general', function () {
-        return view('admin.general');
-    });
-    Route::get('simple', function () {
-        return view('admin.simple');
-    });
+    Route::post('createUser', 'PagesController@createUser')->name('createUser');
+    Route::post('updatePassword', 'PagesController@updatePassword')->name('updatePassword');
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');

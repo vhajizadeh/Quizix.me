@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Question;
 use Route;
+use App\User;
 
 class PagesController extends Controller
 {
@@ -23,7 +24,38 @@ class PagesController extends Controller
     }
 
     public function profile(){
-    	return view('admin.profile');
+    	return view('admin.profile', compact('id'));
+    }
+
+    public function createUser(Request $request){
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+        ]);
+
+        return redirect('admin/profile')->withType('success')->withMessage('User Added');
+    }
+
+    public function updatePassword(Request $request){
+        $this->validate($request, [
+            'upassword' => 'required|string|min:6|confirmed',
+        ]);
+
+        $id = \Auth::user()->id;
+        $user = User::findorfail($id);
+
+        $data = array();
+        $data['password'] = bcrypt($request['password']);
+        
+        $user->update($data);        
+        return redirect('admin/profile')->withType('success')->withMessage('Password Updated');
     }
 
     public function apiShowCategories(){
