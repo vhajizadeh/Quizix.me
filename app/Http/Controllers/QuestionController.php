@@ -38,17 +38,36 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $host_type = env("HOSTING_TYPE", "shared");
+
         $this->validate($request, [
             'title' => 'required',
+            'category_id' => 'required',
+            'question_type' => 'required',
+            'thumbnail' => 'required_if:question_type,photo|mimes:jpeg,jpg,png,bmp,gif',
+            'number_of_answer'  => 'required',
             'choice_a' => 'required',
             'choice_b' => 'required',
-            'choice_c' => 'required',
-            'choice_d' => 'required',
+            'choice_c' => 'required_if:number_of_answer,3|required_if:number_of_answer,4',
+            'choice_d' => 'required_if:number_of_answer,4',            
             'answer' => 'required',
-        ]);
+        ]);             
 
         $data = $request->all(); 
         $data['answer'] = $data[$data['answer']];
+
+        if($request->file('thumbnail')){
+            $file = $request->file('thumbnail');
+            $mimes = $file->getClientMimeType();
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            if($host_type == 'shared'){
+                $file->move(base_path() . '/uploads/question/', $name); 
+            }
+            else{
+                $file->move(base_path() . '/public/uploads/question/', $name); 
+            }
+            $data['thumbnail'] = $name;            
+        } 
 
         $question = new Question($data);        
         $question->save();
@@ -64,7 +83,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = Question::findorfail($id);
+        return view('admin.question.show', compact('question'));
     }
 
     /**
@@ -89,18 +109,37 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $host_type = env("HOSTING_TYPE", "shared");
+
         $this->validate($request, [
             'title' => 'required',
+            'category_id' => 'required',
+            'question_type' => 'required',
+            'thumbnail' => 'required_if:question_type,photo|mimes:jpeg,jpg,png,bmp,gif',
+            'number_of_answer'  => 'required',
             'choice_a' => 'required',
             'choice_b' => 'required',
-            'choice_c' => 'required',
-            'choice_d' => 'required',
+            'choice_c' => 'required_if:number_of_answer,3|required_if:number_of_answer,4',
+            'choice_d' => 'required_if:number_of_answer,4',            
             'answer' => 'required',
-        ]);
+        ]);             
 
         $question = Question::findorfail($id);
-        $data = $request->all();
+        $data = $request->all(); 
         $data['answer'] = $data[$data['answer']];
+
+        if($request->file('thumbnail')){
+            $file = $request->file('thumbnail');
+            $mimes = $file->getClientMimeType();
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            if($host_type == 'shared'){
+                $file->move(base_path() . '/uploads/question/', $name); 
+            }
+            else{
+                $file->move(base_path() . '/public/uploads/question/', $name); 
+            }
+            $data['thumbnail'] = $name;         
+        } 
         
         $question->update($data);        
         return redirect('admin/question')->withType('success')->withMessage('Question Updated');

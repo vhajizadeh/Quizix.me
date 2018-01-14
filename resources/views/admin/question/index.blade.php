@@ -36,6 +36,7 @@
                             <th>SL</th>
                             <th>Title</th>   
                             <th>Category</th>
+                            <th>Question Type</th>
                             <th>Choice A</th>  
                             <th>Choice B</th>
                             <th>Choice C</th>
@@ -56,15 +57,17 @@
                                     {{ "N/A" }}
                                 @endif                                
                             </td>  
+                            <td>{{ ucfirst($question->question_type) }}</td>
                             <td>{{ $question->choice_a }}</td> 
                             <td>{{ $question->choice_b }}</td>  
-                            <td>{{ $question->choice_c }}</td>  
-                            <td>{{ $question->choice_d }}</td>  
+                            <td>{!! $question->choice_c ? $question->choice_c : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
+                            <td>{!! $question->choice_d ? $question->choice_d : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
                             <td>{{ $question->answer }}</td>                          
                             <td>{{ $question->created_at->diffForHumans() }}</td>
                             <td>{!! $question->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>
                             <td>
-                                <a href="{{ Route('questionStatus', ['id' => $question->id, 'status' => $question->status]) }}"><button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Change Status"><i class="fa fa-check"></i></button></a>
+                                <a href="{{ Route('question.show', $question->id) }}"><button class="btn btn-primary btn-sm">View Details</button></a>
+                                <a href="{{ Route('questionStatus', ['id' => $question->id, 'status' => $question->status]) }}"><button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Change Status to {{ $question->status == 1 ? 'Inactive' : 'Active' }}"><i class="fa fa-check"></i></button></a>
                                 <a href="{{ Route('question.edit', $question->id) }}"><button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Edit"><i class="fa fa-pencil"></i></button></a>
                                 {{ Form::open(array('route' => array('question.destroy', $question->id), 'method' => 'delete', 'style' => 'display:initial;')) }}
                                     <button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Delete"><i class="fa fa-times"></i></button>

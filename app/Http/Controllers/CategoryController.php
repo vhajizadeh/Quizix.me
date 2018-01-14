@@ -27,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {       
-        return view('admin.category.create');
+        $categories = Category::where('parent_id', null)->pluck('title', 'id');
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -38,6 +39,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $host_type = env("HOSTING_TYPE", "shared");
+
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -50,7 +53,12 @@ class CategoryController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(base_path() . '/public/uploads/category/', $name); 
+            if($host_type == 'shared'){
+                $file->move(base_path() . '/uploads/category/', $name); 
+            }
+            else{
+                $file->move(base_path() . '/public/uploads/category/', $name); 
+            }
             $data['thumbnail'] = $name;            
         }        
 
@@ -79,7 +87,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorfail($id);
-        return view('admin.category.edit', compact('category'));
+        $categories = Category::where('parent_id', null)->pluck('title', 'id');
+        return view('admin.category.edit', compact('category', 'categories'));
     }
 
     /**
@@ -91,6 +100,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $host_type = env("HOSTING_TYPE", "shared");
+
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -104,7 +115,12 @@ class CategoryController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(base_path() . '/public/uploads/category/', $name); 
+            if($host_type == 'shared'){
+                $file->move(base_path() . '/uploads/category/', $name); 
+            }
+            else{
+                $file->move(base_path() . '/public/uploads/category/', $name); 
+            }
             $data['thumbnail'] = $name;   
         }
         

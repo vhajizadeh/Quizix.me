@@ -25,11 +25,25 @@
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Update Password</div>
+                <div class="panel-heading">Update Data</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('updatePassword') }}">
                         {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('uemail') ? ' has-error' : '' }}">
+                            <label for="uemail" class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input id="uemail" type="email" class="form-control" name="uemail" value="{{ Auth::user()->email }}" required>
+
+                                @if ($errors->has('uemail'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('uemail') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('upassword') ? ' has-error' : '' }}">
                             <label for="upassword" class="col-md-4 control-label">Password</label>

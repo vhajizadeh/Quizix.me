@@ -7,11 +7,21 @@
         <div class="form-group">
             {!! Form::label('description', 'Description'); !!}
             {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Description', 'style' => 'height: 100px;']); !!}
-        </div>
+        </div>             
         <div class="form-group">
             {!! Form::label('thumbnail', 'Thumbnail Image'); !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']); !!}
         </div>
+        @if($categories->count())
+        <hr />
+        <div class="alert alert-warning">
+            Select Parent Category if that is Child Category, otherwise leave that field blank
+        </div>        
+        <div class="form-group">
+            {!! Form::label('parent_id', 'Child Category Of'); !!}
+            {!! Form::select('parent_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Select Parent Category']); !!}
+        </div> 
+        @endif 
     </div>
 
 </div>                        

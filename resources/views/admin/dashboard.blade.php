@@ -46,7 +46,7 @@
       <div class="col-md-5">
          <section class="panel tasks-widget">
             <header class="panel-heading">
-               Categories list
+               Recently added Categories
             </header>
             <div class="panel-body">
                @if(count($categories) > 0)
@@ -54,6 +54,7 @@
                         <tr>
                             <th>SL</th>
                             <th>Title</th> 
+                            <th>Parent Category</th>
                             <th>Quetions</th>
                             <th>Added On</th>
                             <th>Status</th>
@@ -62,6 +63,7 @@
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $category->title }}</td>  
+                            <td>{!! $category->parent['title'] ? $category->parent['title'] : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>
                             <td>{{ $category->question_count }}</td>
                             <td>{{ $category->created_at->diffForHumans() }}</td>
                             <td>{!! $category->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>
@@ -82,7 +84,7 @@
       <div class="col-md-7">
          <section class="panel tasks-widget">
             <header class="panel-heading">
-               Questions list
+              Recently added Questions
             </header>
             <div class="panel-body">
                @if(count($questions) > 0)
@@ -112,8 +114,8 @@
                             </td>  
                             <td>{{ $question->choice_a }}</td> 
                             <td>{{ $question->choice_b }}</td>  
-                            <td>{{ $question->choice_c }}</td>  
-                            <td>{{ $question->choice_d }}</td>  
+                            <td>{!! $question->choice_c ? $question->choice_c : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
+                            <td>{!! $question->choice_d ? $question->choice_d : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
                             <td>{{ $question->answer }}</td>     
                             <td>{{ $question->created_at->diffForHumans() }}</td>                      
                             <td>{!! $question->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>                            

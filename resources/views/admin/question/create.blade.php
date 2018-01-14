@@ -22,9 +22,15 @@
                     Add New Question
                 </header>
                 <div class="panel-body">
+                  @if($categories->count())
                     {!! Form::open(array('route' => 'question.store', 'files' => true)) !!}
                         @include('admin.question.partial.form', ['btntitle' => 'Add Question'])
                     {!! Form::close() !!}
+                  @else
+                    <div class="alert alert-danger">
+                      You need to add Category First!
+                    </div>
+                  @endif
                 </div>
             </section>
         </div>
