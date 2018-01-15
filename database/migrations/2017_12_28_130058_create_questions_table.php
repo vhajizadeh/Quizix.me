@@ -17,9 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('category_id');
             $table->string('title');
-            $table->string('question_type');
+            $table->string('question_type')->default('regular');
             $table->string('thumbnail')->nullable();
-            $table->integer('number_of_answer');
+            $table->integer('number_of_answer')->default(4);
             $table->string('choice_a');
             $table->string('choice_b');
             $table->string('choice_c')->nullable();

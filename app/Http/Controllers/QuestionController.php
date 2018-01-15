@@ -26,7 +26,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('title', 'id');
+        $categories = Category::where('status', 1)->pluck('title', 'id');
         return view('admin.question.create', compact('categories'));
     }
 
@@ -96,7 +96,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findorfail($id);
-        $categories = Category::pluck('title', 'id');
+        $categories = Category::where('status', 1)->pluck('title', 'id');
         return view('admin.question.edit', compact('question', 'categories'));
     }
 
@@ -115,7 +115,7 @@ class QuestionController extends Controller
             'title' => 'required',
             'category_id' => 'required',
             'question_type' => 'required',
-            'thumbnail' => 'required_if:question_type,photo|mimes:jpeg,jpg,png,bmp,gif',
+            'thumbnail' => 'mimes:jpeg,jpg,png,bmp,gif',
             'number_of_answer'  => 'required',
             'choice_a' => 'required',
             'choice_b' => 'required',

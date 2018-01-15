@@ -63,7 +63,7 @@ class PagesController extends Controller
     public function apiShowCategories(){
         $categories = Category::withCount(['question'=>function($q) {
                         return $q->where('status', 1);
-                    }])->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', null)->get();
+                    }])->orderBy('title', 'ASC')->withCount('children')->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', null)->get();
         return $categories;
     }
 
