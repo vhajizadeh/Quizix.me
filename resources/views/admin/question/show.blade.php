@@ -22,25 +22,24 @@
                     <strong>Question:</strong> {{ $question->title }}
                 </header>
 
-                <div class="panel-body" style="max-width: 600px;">
+                <div class="panel-body" style="font-family: 'Lato'; font-size: 15px;">
                     @if($question->thumbnail)
                         <img src="{{ '../../uploads/question/' . $question->thumbnail }}" alt="{{ $question->title }}" class="img-responsive"><br />
                     @endif
-
-                    <ul class="list-group">
-                        <li class="list-group-item"><strong>Question Type:</strong> {{ ucfirst($question->question_type) }}</li>
-                        <hr>
-                        <li class="list-group-item"><strong>Choice A:</strong> {{ $question->choice_a }}</li>
-                        <li class="list-group-item"><strong>Choice B:</strong> {{ $question->choice_b }}</li>
-                        @if($question->choice_c)
-                        <li class="list-group-item"><strong>Choice C:</strong> {{ $question->choice_c }}</li>
-                        @endif
-                        @if($question->choice_d)
-                        <li class="list-group-item"><strong>Choice D:</strong> {{ $question->choice_d }}</li>
-                        @endif
-                        <hr>
-                        <li class="list-group-item"><strong>Answer:</strong> {{ $question->answer }}</li>
-                    </ul>
+                    
+                    <p><strong>Question Type:</strong> {{ ucfirst($question->question_type) }}</p>
+                    <p><strong>Choice A:</strong> {{ $question->choice_a }}</p>
+                    <p><strong>Choice B:</strong> {{ $question->choice_b }}</p>
+                    @if($question->choice_c)
+                    <p><strong>Choice C:</strong> {{ $question->choice_c }}</p>
+                    @endif
+                    @if($question->choice_d)
+                    <p><strong>Choice D:</strong> {{ $question->choice_d }}</p>
+                    @endif
+                    <p><strong>Correct Answer:</strong> {{ $question->answer }}</p>
+                    @if($question->explanation)
+                    <p><strong>Answer Explnation:</strong> {{ $question->explanation }}</p>
+                    @endif
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>

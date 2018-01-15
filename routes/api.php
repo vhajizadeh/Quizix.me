@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('categories', 'PagesController@apiShowCategories');
+Route::get('categories/{id}', 'PagesController@apiShowChildCategories');
 Route::get('category/{id}', 'PagesController@apiShowSingleCategory');
 Route::get('category/{id}/questions', 'PagesController@apiShowSingleCategoryQuestion');
 Route::get('questions', 'PagesController@apiShowQuestions');

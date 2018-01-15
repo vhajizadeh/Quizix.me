@@ -61,11 +61,16 @@ class PagesController extends Controller
     }
 
     public function apiShowCategories(){
-        $request = Route::getCurrentRequest();
-        $request->headers->set('al', 'b');
         $categories = Category::withCount(['question'=>function($q) {
                         return $q->where('status', 1);
-                    }])->orderBy('title', 'ASC')->where('status', 1)->get();
+                    }])->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', null)->get();
+        return $categories;
+    }
+
+    public function apiShowChildCategories($id){
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', $id)->get();
         return $categories;
     }
 

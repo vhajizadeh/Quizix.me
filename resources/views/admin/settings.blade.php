@@ -72,8 +72,13 @@
                             <th>Type</th>
                         </tr>
                         <tr>
-                            <td>Get all Categories</td>
+                            <td>Get all Categories(First Level)</td>
                             <td>{{ url('/') }}/api/categories</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get all Child Categories of a Category</td>
+                            <td>{{ url('/') }}/api/categories/{id}</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>
