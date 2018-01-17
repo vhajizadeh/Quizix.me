@@ -46,9 +46,9 @@ jQuery(document).ready(function(){
   $('#question_type').change(function(e) {
     e.preventDefault();
       if ($(this).val() == 'regular' ) {
-        $('#question_image').fadeOut();
+        $('.question_image').fadeOut();
       } else if ( $(this).val() == 'photo' ) {
-        $('#question_image').fadeIn();
+        $('.question_image').fadeIn();
       }
   });
 });

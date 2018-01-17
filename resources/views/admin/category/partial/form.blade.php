@@ -7,14 +7,19 @@
         <div class="form-group">
             {!! Form::label('description', 'Description'); !!}
             {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Description', 'style' => 'height: 100px;']); !!}
-        </div>             
+        </div>   
+        @if($btntitle == 'Update Category')
+        <div class="alert alert-success">
+            Upload image if you want to ovewrite existing one(if any), otherwise leave that field blank
+        </div>    
+        @endif       
         <div class="form-group">
             {!! Form::label('thumbnail', 'Thumbnail Image'); !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']); !!}
         </div>
         @if($categories->count())
         <hr />
-        <div class="alert alert-warning">
+        <div class="alert alert-success">
             Select Parent Category if that is Child Category, otherwise leave that field blank
         </div>        
         <div class="form-group">

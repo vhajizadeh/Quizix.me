@@ -12,7 +12,12 @@
             {!! Form::label('question_type', 'Question Type'); !!}
             {!! Form::select('question_type', ['regular' => 'Regular Question', 'photo' => 'Photo Question'], null, ['id' => 'question_type', 'class' => 'form-control']); !!}
         </div>
-        <div class="form-group" id="question_image" style="{{ isset($question) && $question->question_type == 'photo' ? 'display: block;' : 'display: none;' }}">
+        @if($btntitle == 'Update Question')
+        <div class="alert alert-success question_image" style="{{ isset($question) && $question->question_type == 'photo' ? 'display: block;' : 'display: none;' }}">
+            Upload image if you want to ovewrite existing one(if any), otherwise leave that field blank
+        </div>    
+        @endif   
+        <div class="form-group question_image" style="{{ isset($question) && $question->question_type == 'photo' ? 'display: block;' : 'display: none;' }}">
             {!! Form::label('thumbnail', 'Question Image'); !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']); !!}
         </div>

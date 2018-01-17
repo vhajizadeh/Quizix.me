@@ -45,6 +45,7 @@ class PagesController extends Controller
 
     public function updatePassword(Request $request){
         $this->validate($request, [
+            'uname' => 'required|string|max:255',
             'uemail' => 'required|string|email|max:255',
             'upassword' => 'required|string|min:6|confirmed',
         ]);
@@ -53,11 +54,12 @@ class PagesController extends Controller
         $user = User::findorfail($id);
 
         $data = array();
+        $data['name'] = $request['uname'];
         $data['email'] = $request['uemail'];
         $data['password'] = bcrypt($request['upassword']);
         
         $user->update($data);        
-        return redirect('admin/profile')->withType('success')->withMessage('Password Updated');
+        return redirect('admin/profile')->withType('success')->withMessage('Profile Updated');
     }
 
     public function apiShowCategories(){

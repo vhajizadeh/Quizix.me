@@ -31,6 +31,20 @@
                     <form class="form-horizontal" method="POST" action="{{ route('updatePassword') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('uname') ? ' has-error' : '' }}">
+                            <label for="uname" class="col-md-4 control-label">Name</label>
+
+                            <div class="col-md-6">
+                                <input id="uname" type="text" class="form-control" name="uname" value="{{ old('uname') }}" required autofocus>
+
+                                @if ($errors->has('uname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('uname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('uemail') ? ' has-error' : '' }}">
                             <label for="uemail" class="col-md-4 control-label">E-Mail Address</label>
 
