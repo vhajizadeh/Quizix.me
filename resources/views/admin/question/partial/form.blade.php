@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('title', 'Title'); !!}
-            {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']); !!}
+            {!! Form::text('title', null, ['class' => 'form-control input-editor', 'placeholder' => 'Title']); !!}
         </div>
         <div class="form-group">
             {!! Form::label('category_id', 'Category'); !!}
@@ -41,9 +41,33 @@
             {!! Form::label('choice_d', 'Choice D'); !!}
             {!! Form::text('choice_d', null, ['class' => 'form-control', 'placeholder' => 'Choice D']); !!}
         </div>
+        @php
+            if(isset($question)){
+                switch($question->answer){
+                    case $question->choice_a:
+                        $answer_choice = 'choice_a';
+                        break;
+                    case $question->choice_b:
+                        $answer_choice = 'choice_b';
+                        break;
+                    case $question->choice_c:
+                        $answer_choice = 'choice_c';
+                        break;
+                    case $question->choice_d:
+                        $answer_choice = 'choice_d';
+                        break;
+                    default:
+                        $answer_choice = 'choice_a';
+                        break;
+                }
+            }
+            else{
+                $answer_choice = null;
+            }
+        @endphp
         <div class="form-group">
             {!! Form::label('answer', 'Correct Answer'); !!}
-            {!! Form::select('answer', ['choice_a' => 'Choice A', 'choice_b' => 'Choice B', 'choice_c' => 'Choice C', 'choice_d' => 'Choice D'], null, ['id' => 'answer', 'class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
+            {!! Form::select('answer', ['choice_a' => 'Choice A', 'choice_b' => 'Choice B', 'choice_c' => 'Choice C', 'choice_d' => 'Choice D'], $answer_choice, ['id' => 'answer', 'class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
         </div>
         <div class="form-group">
             {!! Form::label('explanation', 'Answer Explanation'); !!}

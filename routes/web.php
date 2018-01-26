@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function() {
 
     Route::post('createUser', 'PagesController@createUser')->name('createUser');
     Route::post('updatePassword', 'PagesController@updatePassword')->name('updatePassword');
+
+    Route::get('question/category/{id}', 'QuestionController@filterCategory')->name('filterCategory');
+    Route::get('question/search/{title}', 'QuestionController@searchQuestion')->name('searchQuestion');
 });
 
 Auth::routes();

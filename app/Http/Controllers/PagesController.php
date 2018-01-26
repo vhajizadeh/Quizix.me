@@ -7,6 +7,7 @@ use App\Category;
 use App\Question;
 use Route;
 use App\User;
+use Yajra\Datatables\Facades\Datatables;
 
 class PagesController extends Controller
 {
@@ -24,7 +25,7 @@ class PagesController extends Controller
     }
 
     public function profile(){
-    	return view('admin.profile', compact('id'));
+    	return view('admin.profile');
     }
 
     public function createUser(Request $request){

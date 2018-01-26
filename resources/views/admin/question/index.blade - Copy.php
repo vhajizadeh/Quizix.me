@@ -22,44 +22,7 @@
         </div>
     </div>
 
-    <div class="row"> 
-        @if(count($categories) > 0)  
-        <div class="col-sm-6">
-            <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-disabled" data-toggle="dropdown">
-                        <span>Filter by Category: </span> 
-                    </button>
-                </div>      
-                <select name="category_select" class="form-control" id="category_select">
-                    <option value="">Select One</option>
-                    <option value="{{ URL::to('/') . '/admin/question/category/all' }}">All</option>
-                    @foreach($categories as $category)
-                    <option value="{{ URL::to('/') . '/admin/question/category/' . $category->id }}">{{ $category->title }} ({{ $category->question_count }})</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>         
-        @endif
-        <div class="col-sm-6">
-            <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-disabled" data-toggle="dropdown">
-                        <span>Search by Question Title: </span> 
-                    </button>
-                </div>   
-                <input type="hidden" name="search_url" id="search_url" value="{{ URL::to('/') . '/admin/question/search/' }}">   
-                <input type="text" class="form-control" id="question_title" name="question_title" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" id="search_question" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>        
-    </div>
-
-    <p class="clearfix">&nbsp;</p>
-
-    <div class="row">
+	<div class="row">
         <div class="col-xs-12">
             <div class="panel">                
                 <header class="panel-heading">
@@ -130,29 +93,12 @@
 
 @push('styles')
    <style>
-        /* Page Specific Custom Style Here */
+      /* Page Specific Custom Style Here */
    </style>
 @endpush
 
 @push('scripts')
-    <script>
-        $(function(){
-            $('#category_select').on('change', function () {
-                var url = $(this).val();
-                if(url){
-                    window.location = url;
-                }
-                return false;
-            });
-
-            $('#search_question').on('click', function () {
-                var url = $('#search_url').val();
-                var title = $('#question_title').val();
-                if(title){
-                    window.location = url + title;
-                }
-                return false;
-            });            
-        });
-    </script>
+   <script>
+       /* Page Specific Custom Script Here */
+   </script>
 @endpush

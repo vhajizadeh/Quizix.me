@@ -16,7 +16,10 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::orderBy('id', 'DESC')->paginate(10);
-        return view('admin.question.index', compact('questions'));
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('title', 'ASC')->get();
+        return view('admin.question.index', compact('questions', 'categories'));
     }
 
     /**
@@ -177,5 +180,38 @@ class QuestionController extends Controller
         }
         $question->update($data);
         return redirect('admin/question')->withType('success')->withMessage($message); 
+    }
+
+    /**
+     * Chnage status of the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function filterCategory($id){
+        if($id == 'all'){
+            $questions = Question::orderBy('id', 'DESC')->paginate(10);
+        }
+        else{
+            $questions = Question::orderBy('id', 'DESC')->where('category_id', $id)->paginate(10);
+        }        
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('title', 'ASC')->get();
+        return view('admin.question.index', compact('questions', 'categories'));
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $title
+     * @return \Illuminate\Http\Response
+     */
+    public function searchQuestion($title){
+        $questions = Question::orderBy('id', 'DESC')->where('title', 'like', '%' . $title . '%')->paginate(10);
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('title', 'ASC')->get();
+        return view('admin.question.index', compact('questions', 'categories'));
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2018 at 10:23 PM
+-- Generation Time: Jan 17, 2018 at 09:12 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -54,10 +54,10 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(9, '2014_10_12_000000_create_users_table', 1),
-(10, '2014_10_12_100000_create_password_resets_table', 1),
-(11, '2017_12_28_130024_create_categories_table', 1),
-(12, '2017_12_28_130058_create_questions_table', 1);
+(13, '2014_10_12_000000_create_users_table', 1),
+(14, '2014_10_12_100000_create_password_resets_table', 1),
+(15, '2017_12_28_130024_create_categories_table', 1),
+(16, '2017_12_28_130058_create_questions_table', 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Test User', 'user@test.com', '$2y$10$qeXftpwF4X1PDrINzmNUq.WPy9HBBVXIL/z1Lion5jRtnZKRQrwxu', 'N5srWBx2OXbEqzKvwywij7xMtdesC2qbxXw7igoropyZyU7ih8op9VjtGRJk', '2018-01-15 16:22:04', '2018-01-15 16:22:04');
+(1, 'John Doe', 'user@test.com', '$2y$10$hJHhMhLarHKLm13e9Havc.Rr7c95FC7Hq3jmXaASl1rRKdjq5b6zi', 'gycgDSPPbw5uyJbwWmG8y0uNXipcbHSxgU0ck6ky7aQUHd37QrwHNeVagcFg', '2017-12-28 01:02:23', '2018-01-17 15:09:48');
 
 --
 -- Indexes for dumped tables
@@ -126,8 +126,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `categories_title_unique` (`title`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -167,7 +166,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `questions`
 --
@@ -177,7 +176,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

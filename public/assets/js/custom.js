@@ -51,4 +51,16 @@ jQuery(document).ready(function(){
         $('.question_image').fadeIn();
       }
   });
+
+  var choice = $('#number_of_answer').find(":selected").text();
+  if(choice == 2){
+    $("#answer option[value='choice_c']").remove();
+    $("#answer option[value='choice_d']").remove();
+  }
+  else if(choice == 3){
+    $("#answer option[value='choice_d']").remove();
+  }
+  else{
+    
+  }
 });
