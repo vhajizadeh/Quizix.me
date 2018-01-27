@@ -36,6 +36,7 @@
                             <th>SL</th>
                             <th>Title</th> 
                             <th>Parent Category</th>
+                            <th>Quick Quiz</th>
                             <th>Quetions</th>
                             <th>Thumbnail</th>
                             <th>Added On</th>
@@ -47,6 +48,7 @@
                             <td>{{ ++$key }}</td>
                             <td>{{ $category->title }}</td>  
                             <td>{!! $category->parent['title'] ? $category->parent['title'] : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>
+                            <td>{!! $category->quick == 1 ? '<span class="label label-success" style="padding: 5px 10px;">Yes</span>' : '<span class="label label-danger" style="padding: 5px 10px;">No</span>' !!}</td>
                             <td>{{ $category->question_count }}</td>
                             <td>
                                 @if($category->thumbnail)

@@ -46,6 +46,7 @@ class CategoryController extends Controller
             'title' => 'required',
             'description' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png,bmp,gif',
+            'quick' => 'required',
         ]);
 
         $data = $request->all();
@@ -107,6 +108,7 @@ class CategoryController extends Controller
             'title' => 'required',
             'description' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png,bmp,gif',
+            'quick' => 'required',
         ]);
 
         $category = Category::findorfail($id);

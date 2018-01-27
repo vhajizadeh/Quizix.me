@@ -17,6 +17,7 @@
             {!! Form::label('thumbnail', 'Thumbnail Image'); !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']); !!}
         </div>
+        <hr />        
         @if($categories->count())
         <hr />
         <div class="alert alert-success">
@@ -27,6 +28,13 @@
             {!! Form::select('parent_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Select Parent Category']); !!}
         </div> 
         @endif 
+        <div class="alert alert-danger">
+            Quick Quiz Round- Within given time Answer as many Questions as you can!            
+        </div>        
+        <div class="form-group">
+            {!! Form::label('quick', 'Is it a Qucik Quiz Round Category?'); !!}
+            {!! Form::select('quick', [0 => 'No', 1 => 'Yes'], 0, ['class' => 'form-control', 'placeholder' => 'Select One']) !!}
+        </div> 
     </div>
 
 </div>                        
