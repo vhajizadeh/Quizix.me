@@ -28,6 +28,44 @@ class PagesController extends Controller
     	return view('admin.profile');
     }
 
+    public function notification(){
+        return view('admin.notification');
+    }
+
+    public function sendNotification(Request $request){
+        //return $request->all();
+
+        $key = 'AAAAFAvXdQk:APA91bH0zjo-ipt2-ZA0cXZkoSLWw6wtCcrYdZ4EADxefHV7KHJpKsMq0PwSwY1ebWG0JgCy8ghN2A3usD5vS_NzbZ7uFxH_4eJQbNRD2rg4KRcwFU4nIZQLL_d-Td880BkcCK17Z7Fo';
+        $data = array("to" => "/topic/quizix", "notification" => array( "title" => $request['title'], "body" => $request['message'], "vibrate" => $request['vibrate'], "sound" => $request['sound']));                                                                    
+        
+        //$data_string = json_encode($data); 
+        //return "The Json Data : ".$data_string; 
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+ 
+        $headers = array(
+            'Authorization: key=' . $key,
+            'Content-Type: application/json'
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url); 
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        $result = curl_exec($ch);
+        if($result === FALSE){
+            die('Sending Push Notification Failed: ' . curl_error($ch));
+            return false;
+        }
+ 
+        curl_close($ch);
+ 
+        return redirect('admin/notification')->withType('success')->withMessage('Push Notification Sent!');
+    }
+
     public function createUser(Request $request){
         $this->validate($request, [
             'name' => 'required|string|max:255',

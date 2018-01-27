@@ -22,6 +22,11 @@
             <i class="fa fa-cog"></i> <span>Settings</span>
             </a>
          </li>
+         <li class="{{ Request::segment(2) === 'notification' ? 'active' : '' }}">
+            <a href="{{ Route('notification') }}">
+            <i class="fa fa-bell"></i> <span>Push Notification</span>
+            </a>
+         </li>
       </ul>
    </section>
    <!-- /.sidebar -->

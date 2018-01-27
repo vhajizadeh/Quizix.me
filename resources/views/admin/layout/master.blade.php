@@ -6,29 +6,16 @@
 
       <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-      <!-- bootstrap 3.0.2 -->
+      <!-- Bootstrap -->
       <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
       <!-- font Awesome -->
       <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-      <!-- Ionicons -->
-      <link href="{{ asset('assets/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
-      <!-- Morris chart -->
-      <link href="{{ asset('assets/css/morris/morris.css') }}" rel="stylesheet" type="text/css" />
-      <!-- jvectormap -->
-      <link href="{{ asset('assets/css/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
-      <!-- Date Picker -->
-      <link href="{{ asset('assets/css/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
-      <!-- fullCalendar -->
-      <!-- <link href="{{ asset('assets/css/fullcalendar/fullcalendar.css') }}" rel="stylesheet" type="text/css" /> -->
-      <!-- Daterange picker -->
-      <link href="{{ asset('assets/css/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
-      <!-- iCheck for checkboxes and radio inputs -->
-      <link href="{{ asset('assets/css/iCheck/all.css') }}" rel="stylesheet" type="text/css" />
-      <!-- bootstrap wysihtml5 - text editor -->
-      <!-- <link href="{{ asset('assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" type="text/css" /> -->
+      <!-- Google Font -->
       <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
       <!-- Theme style -->
       <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+      <!-- Summernote -->
+      <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,9 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
       <![endif]-->
 
-      <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-
-      <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+      
       
       @stack('styles')
 
@@ -67,31 +52,13 @@
       <script src="{{ asset('assets/js/jquery-ui-1.10.3.min.js') }}" type="text/javascript"></script>
       <!-- Bootstrap -->
       <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
-      <!-- daterangepicker -->
-      <script src="{{ asset('assets/js/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-      <script src="{{ asset('assets/js/plugins/chart.js') }}" type="text/javascript"></script>
-      <!-- datepicker
-         <script src="{{ asset('assets/js/plugins/datepicker/bootstrap-datepicker.js') }}" type="text/javascript"></script>-->
-      <!-- Bootstrap WYSIHTML5
-         <script src="{{ asset('assets/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript"></script>-->
-      <!-- iCheck -->
-      <script src="{{ asset('assets/js/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
-      <!-- calendar -->
-      <script src="{{ asset('assets/js/plugins/fullcalendar/fullcalendar.js') }}" type="text/javascript"></script>
       <!-- Director App -->
       <script src="{{ asset('assets/js/Director/app.js') }}" type="text/javascript"></script>
-
       <!--  Notifications Plugin    -->
       <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
-
-      <!-- Director dashboard demo (This is only for demo purposes) -->
-      <script src="{{ asset('assets/js/Director/dashboard.js') }}" type="text/javascript"></script>
-
-      <!-- include summernote css/js -->
+      <!-- Summernote -->
       <script src="{{ asset('assets/js/summernote.js') }}"></script>
-
-      <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
+      <!-- Custom Script -->  
       <script src="{{ asset('assets/js/custom.js') }}"></script>
 
       <script>

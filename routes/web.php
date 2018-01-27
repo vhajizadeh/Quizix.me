@@ -23,6 +23,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function() {
     Route::resource('question', 'QuestionController');
     Route::get('setting', 'PagesController@settings')->name('setting');
     Route::get('profile', 'PagesController@profile')->name('profile');
+    Route::get('notification', 'PagesController@notification')->name('notification');
+
+    Route::post('sendNotification', 'PagesController@sendNotification')->name('sendNotification');
 
     Route::post('createUser', 'PagesController@createUser')->name('createUser');
     Route::post('updatePassword', 'PagesController@updatePassword')->name('updatePassword');
