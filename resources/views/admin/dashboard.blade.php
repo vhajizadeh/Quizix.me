@@ -22,7 +22,7 @@
             </div>
          </div>
       </div>
-{{--       <div class="col-md-3">
+        {{-- <div class="col-md-3">
          <div class="sm-st clearfix">
             <span class="sm-st-icon st-green"><i class="fa fa-star"></i></span>
             <div class="sm-st-info">
@@ -50,6 +50,7 @@
             </header>
             <div class="panel-body">
                @if(count($categories) > 0)
+               <div class="table-responsive">
                     <table class="table table-hover">
                         <tr>
                             <th>SL</th>
@@ -70,6 +71,7 @@
                         </tr>
                         @endforeach
                     </table>
+                </div>
                     @else
                         <p><h5 style="color:#F00;">No Data</h5></p>
                     @endif
@@ -88,6 +90,7 @@
             </header>
             <div class="panel-body">
                @if(count($questions) > 0)
+               <div class="table-responsive">
                     <table class="table table-hover">
                         <tr>
                             <th>SL</th>
@@ -122,6 +125,7 @@
                         </tr>
                         @endforeach
                     </table>
+                </div>
                     @else
                         <p><h5 style="color:#F00;">No Data</h5></p>
                     @endif

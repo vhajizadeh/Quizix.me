@@ -68,6 +68,7 @@
                 </header>
                 <div class="panel-body table-responsive">
                     @if(count($questions) > 0)
+                    <div class="table-responsive">
                     <table class="table table-hover" id="questions">
                         <thead>                          
                             <tr>
@@ -115,7 +116,8 @@
                         </tr>
                         @endforeach
                     </table>
-
+                    </div>
+                    
                     <p>&nbsp;</p>
                     
                     {{ $questions->render() }}  

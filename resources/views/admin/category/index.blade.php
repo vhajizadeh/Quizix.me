@@ -31,6 +31,7 @@
                 </header>
                 <div class="panel-body table-responsive">
                     @if(count($categories) > 0)
+                    <div class="table-responsive">
                     <table class="table table-hover">
                         <tr>
                             <th>SL</th>
@@ -67,7 +68,8 @@
                         </tr>
                         @endforeach
                     </table>
-
+                    </div>
+                    
                     <p>&nbsp;</p>
                     
                     {{ $categories->render() }}  
