@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="form-group">
             {!! Form::label('title', 'Title'); !!}
-            {!! Form::text('title', null, ['class' => 'form-control input-editor', 'placeholder' => 'Title']); !!}
+            {{ Form::textarea('title', null, ['class' => 'form-control input-editor', 'placeholder' => 'Title', 'size' => '30x2']) }}
         </div>
         <div class="form-group">
             {!! Form::label('category_id', 'Category'); !!}
@@ -27,19 +27,19 @@
         </div>        
         <div class="form-group">
             {!! Form::label('choice_a', 'Choice A'); !!}
-            {!! Form::text('choice_a', null, ['class' => 'form-control', 'placeholder' => 'Choice A']); !!}
+            {{ Form::textarea('choice_a', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice A', 'size' => '30x2']) }}
         </div>
         <div class="form-group">
             {!! Form::label('choice_b', 'Choice B'); !!}
-            {!! Form::text('choice_b', null, ['class' => 'form-control', 'placeholder' => 'Choice B']); !!}
+            {{ Form::textarea('choice_b', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice B', 'size' => '30x2']) }}
         </div>
         <div class="form-group choice_c" style="{{ isset($question) && $question->number_of_answer == 2 ? 'display: none;' : 'display: block;' }}">
             {!! Form::label('choice_c', 'Choice C'); !!}
-            {!! Form::text('choice_c', null, ['class' => 'form-control', 'placeholder' => 'Choice C']); !!}
+            {{ Form::textarea('choice_c', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice C', 'size' => '30x2']) }}
         </div>
         <div class="form-group choice_d" style="{{ isset($question) && ($question->number_of_answer == 2 || $question->number_of_answer == 3) ? 'display: none;' : 'display: block;' }}">
             {!! Form::label('choice_d', 'Choice D'); !!}
-            {!! Form::text('choice_d', null, ['class' => 'form-control', 'placeholder' => 'Choice D']); !!}
+            {{ Form::textarea('choice_d', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice D', 'size' => '30x2']) }}
         </div>
         @php
             if(isset($question)){
@@ -71,7 +71,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('explanation', 'Answer Explanation'); !!}
-            {{ Form::textarea('explanation', null, ['class' => 'form-control', 'placeholder' => 'Answer Explanation', 'size' => '30x2']) }}
+            {{ Form::textarea('explanation', null, ['class' => 'form-control input-editor', 'placeholder' => 'Answer Explanation', 'size' => '30x2']) }}
         </div>
     </div>
 

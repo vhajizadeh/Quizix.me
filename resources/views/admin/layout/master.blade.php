@@ -65,7 +65,7 @@
          $(document).ready(function() {
             $('.input-editor').summernote({
                toolbar: [
-                  ['font', ['bold', 'italic', 'superscript', 'subscript']],
+                  ['font', ['superscript', 'subscript']],
                ]
             });
          });

@@ -33,37 +33,47 @@ class PagesController extends Controller
     }
 
     public function sendNotification(Request $request){
-        //return $request->all();
+        $key = env("FIREBASE_API_SERVER_KEY", "");
 
-        $key = 'AAAAFAvXdQk:APA91bH0zjo-ipt2-ZA0cXZkoSLWw6wtCcrYdZ4EADxefHV7KHJpKsMq0PwSwY1ebWG0JgCy8ghN2A3usD5vS_NzbZ7uFxH_4eJQbNRD2rg4KRcwFU4nIZQLL_d-Td880BkcCK17Z7Fo';
-        $data = array("to" => "/topic/quizix", "notification" => array( "title" => $request['title'], "body" => $request['message'], "vibrate" => $request['vibrate'], "sound" => $request['sound']));                                                                    
-        
-        //$data_string = json_encode($data); 
-        //return "The Json Data : ".$data_string; 
+        if(!empty($key)){
+            $this->validate($request, [
+                'title' => 'required',
+                'message' => 'required',
+            ]);
+            
+            $data = array("to" => "/topics/quizix", "notification" => array( "title" => $request['title'], "body" => $request['message'], "sound" => $request['sound']));                                                                    
+            //$data_string = json_encode($data); 
+            //return "The Json Data : ".$data_string; 
 
-        $url = 'https://fcm.googleapis.com/fcm/send';
- 
-        $headers = array(
-            'Authorization: key=' . $key,
-            'Content-Type: application/json'
-        );
+            $url = 'https://fcm.googleapis.com/fcm/send';
+     
+            $headers = array(
+                'Authorization: key=' . $key,
+                'Content-Type: application/json'
+            );
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url); 
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        $result = curl_exec($ch);
-        if($result === FALSE){
-            die('Sending Push Notification Failed: ' . curl_error($ch));
-            return false;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url); 
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            $result = curl_exec($ch);
+            if($result === FALSE){
+                die('Sending Push Notification Failed: ' . curl_error($ch));
+                return false;
+            }
+     
+            curl_close($ch);
+
+            // return $result;
+     
+            return redirect('admin/notification')->withType('success')->withMessage('Push Notification Sent!');
         }
- 
-        curl_close($ch);
- 
-        return redirect('admin/notification')->withType('success')->withMessage('Push Notification Sent!');
+        else{
+            return 'Enter Your Firebase Server API Key on the .env File First!';
+        }
     }
 
     public function createUser(Request $request){

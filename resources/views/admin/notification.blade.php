@@ -43,13 +43,8 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('sound', 'Sound'); !!} &nbsp; 
-                                    {{ Form::radio('sound', 1, true) }} On &nbsp; &nbsp;
+                                    {{ Form::radio('sound', 'default', true) }} On &nbsp; &nbsp;
                                     {{ Form::radio('sound', 0) }} Off
-                                </div>
-                                <div class="form-group">
-                                    {!! Form::label('vibrate', 'Vibration'); !!} &nbsp; 
-                                    {{ Form::radio('vibrate', 1) }} On &nbsp; &nbsp;
-                                    {{ Form::radio('vibrate', 0, true) }} Off
                                 </div>
                             </div>
 

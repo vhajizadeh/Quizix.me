@@ -16,14 +16,14 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id');
-            $table->string('title');
+            $table->text('title');
             $table->string('question_type')->default('regular');
             $table->string('thumbnail')->nullable();
             $table->integer('number_of_answer')->default(4);
-            $table->string('choice_a');
-            $table->string('choice_b');
-            $table->string('choice_c')->nullable();
-            $table->string('choice_d')->nullable();
+            $table->text('choice_a');
+            $table->text('choice_b');
+            $table->text('choice_c')->nullable();
+            $table->text('choice_d')->nullable();
             $table->string('answer');
             $table->text('explanation')->nullable();
             $table->tinyInteger('status')->default(1);

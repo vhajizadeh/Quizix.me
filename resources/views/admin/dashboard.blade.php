@@ -107,7 +107,7 @@
                         @foreach($questions as $key => $question)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $question->title }}</td>
+                            <td>{!! $question->title !!}</td>
                             <td>
                                 @if($question->category)
                                     {{ $question->category->title }}
@@ -115,11 +115,11 @@
                                     {{ "N/A" }}
                                 @endif                                
                             </td>  
-                            <td>{{ $question->choice_a }}</td> 
-                            <td>{{ $question->choice_b }}</td>  
+                            <td>{!! $question->choice_a !!}</td> 
+                            <td>{!! $question->choice_b !!}</td>  
                             <td>{!! $question->choice_c ? $question->choice_c : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
                             <td>{!! $question->choice_d ? $question->choice_d : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
-                            <td>{{ $question->answer }}</td>     
+                            <td>{!! $question->answer !!}</td>     
                             <td>{{ $question->created_at->diffForHumans() }}</td>                      
                             <td>{!! $question->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>                            
                         </tr>
