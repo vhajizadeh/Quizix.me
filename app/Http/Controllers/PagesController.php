@@ -7,7 +7,7 @@ use App\Category;
 use App\Question;
 use Route;
 use App\User;
-use Yajra\Datatables\Facades\Datatables;
+use Auth;
 
 class PagesController extends Controller
 {
@@ -33,6 +33,9 @@ class PagesController extends Controller
     }
 
     public function sendNotification(Request $request){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $key = env("FIREBASE_API_SERVER_KEY", "");
 
         if(!empty($key)){
@@ -77,6 +80,9 @@ class PagesController extends Controller
     }
 
     public function createUser(Request $request){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -93,6 +99,9 @@ class PagesController extends Controller
     }
 
     public function updatePassword(Request $request){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $this->validate($request, [
             'uname' => 'required|string|max:255',
             'uemail' => 'required|string|email|max:255',
@@ -121,7 +130,7 @@ class PagesController extends Controller
     public function apiShowChildCategories($id){
         $categories = Category::withCount(['question'=>function($q) {
                         return $q->where('status', 1);
-                    }])->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', $id)->get();
+                    }])->withCount('children')->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', $id)->get();
         return $categories;
     }
 
@@ -141,7 +150,7 @@ class PagesController extends Controller
     }
 
     public function apiShowSingleQuestion($id){
-        $question = Question::findorfail($id)->get();
+        $question = Question::findorfail($id)->get();      
         return $question;
     }
 }

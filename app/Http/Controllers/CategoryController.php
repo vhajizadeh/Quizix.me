@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-use Yajra\Datatables\Facades\Datatables;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {       
-        $categories = Category::where('parent_id', null)->pluck('title', 'id');
+        $categories = Category::pluck('title', 'id');
         return view('admin.category.create', compact('categories'));
     }
 
@@ -40,6 +40,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $host_type = env("HOSTING_TYPE", "shared");
 
         $this->validate($request, [
@@ -89,7 +92,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorfail($id);
-        $categories = Category::where('parent_id', null)->pluck('title', 'id');
+        $categories = Category::where('id', '!=', $id)->pluck('title', 'id');
         return view('admin.category.edit', compact('category', 'categories'));
     }
 
@@ -102,6 +105,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $host_type = env("HOSTING_TYPE", "shared");
 
         $this->validate($request, [
@@ -139,6 +145,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $category = Category::findorfail($id);
         $category->destroy($id);
         $category->question()->update(['status' => 0]);
@@ -153,6 +162,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function status($id, $status){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $category = Category::findorfail($id);
         if($status == 0){
             $data['status'] = 1;

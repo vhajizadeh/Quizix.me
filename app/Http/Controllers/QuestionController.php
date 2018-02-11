@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Question;
+use Auth;
 
 class QuestionController extends Controller
 {
@@ -56,8 +57,21 @@ class QuestionController extends Controller
             'answer' => 'required',
         ]);             
 
-        $data = $request->all(); 
-        $data['answer'] = $data[$data['answer']];
+        $data = $request->all();
+         
+        $data['choice_a'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
+        $data['choice_b'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        if($data['choice_c'] != null){
+            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+        }
+        if($data['choice_c'] != null){
+            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+        }
+        $data['title'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        if($data['explanation'] != null){
+            $data['explanation'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+        }
+        $data['answer'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1));   
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');
@@ -129,7 +143,20 @@ class QuestionController extends Controller
 
         $question = Question::findorfail($id);
         $data = $request->all(); 
-        $data['answer'] = $data[$data['answer']];
+
+        $data['choice_a'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
+        $data['choice_b'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        if($data['choice_c'] != null){
+            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+        }
+        if($data['choice_c'] != null){
+            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+        }
+        $data['title'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        if($data['explanation'] != null){
+            $data['explanation'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+        }
+        $data['answer'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1));   
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');
