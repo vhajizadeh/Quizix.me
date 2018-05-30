@@ -50,6 +50,8 @@ class CategoryController extends Controller
             'description' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png,bmp,gif',
             'quick' => 'required',
+            'limit_questions' => 'nullable|regex:/^[0-9]+$/',
+            'paid' => 'required',
         ]);
 
         $data = $request->all();
@@ -115,6 +117,8 @@ class CategoryController extends Controller
             'description' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png,bmp,gif',
             'quick' => 'required',
+            'limit_questions' => 'nullable|regex:/^[0-9]+$/',
+            'paid' => 'required',
         ]);
 
         $category = Category::findorfail($id);
@@ -176,5 +180,22 @@ class CategoryController extends Controller
         }
         $category->update($data);
         return redirect('admin/category')->withType('success')->withMessage($message); 
+    }
+
+    public function order(){
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->orderBy('position', 'ASC')->get();
+        return view('admin.category.order', compact('categories'));
+    }
+
+    public function chnageOrder(Request $request){
+        foreach($request['cat_id'] as $position => $cat){
+            $category = Category::findorfail($cat);
+            $data['position'] = $position + 1;             
+            $category->update($data);   
+        }
+
+        return redirect('admin/category')->withType('success')->withMessage('Category Order Updated');
     }
 }

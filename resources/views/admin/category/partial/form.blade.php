@@ -16,8 +16,7 @@
         <div class="form-group">
             {!! Form::label('thumbnail', 'Thumbnail Image'); !!}
             {!! Form::file('thumbnail', ['class' => 'form-control']); !!}
-        </div>
-        <hr />        
+        </div>      
         @if($categories->count())
         <hr />
         <div class="alert alert-success">
@@ -33,8 +32,22 @@
         </div>        
         <div class="form-group">
             {!! Form::label('quick', 'Is it a Qucik Quiz Round Category?'); !!}
-            {!! Form::select('quick', [0 => 'No', 1 => 'Yes'], 0, ['class' => 'form-control', 'placeholder' => 'Select One']) !!}
+            {!! Form::select('quick', [0 => 'No', 1 => 'Yes'], null, ['class' => 'form-control', 'placeholder' => 'Select One']) !!}
         </div> 
+        <div class="alert alert-success">
+            Limit Questions- Numbers of questions you want to show on that Category, leave blank if you want to show all    
+        </div>   
+        <div class="form-group">
+            {!! Form::label('limit_questions', 'Limit Questions'); !!}
+            {!! Form::text('limit_questions', null, ['class' => 'form-control', 'placeholder' => 'Example- 10/20/30']); !!}
+        </div>
+        <div class="alert alert-info">
+            Paid- Is it a Paid Category? Need In-App-Purchase to unlock.  
+        </div>   
+        <div class="form-group">
+            {!! Form::label('paid', 'Paid Category'); !!}
+            {!! Form::select('paid', [0 => 'No', 1 => 'Yes'], null, ['class' => 'form-control', 'placeholder' => 'Select One']) !!}
+        </div>
     </div>
 
 </div>                        

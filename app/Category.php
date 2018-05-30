@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['title', 'description', 'thumbnail', 'parent_id', 'quick', 'status'];
+    protected $fillable = ['title', 'description', 'thumbnail', 'parent_id', 'quick', 'limit_questions', 'position', 'paid', 'status'];
 
     public function question(){
         return $this->hasMany('App\Question');

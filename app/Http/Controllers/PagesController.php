@@ -8,6 +8,7 @@ use App\Question;
 use Route;
 use App\User;
 use Auth;
+use App\Tutorial;
 
 class PagesController extends Controller
 {
@@ -28,14 +29,37 @@ class PagesController extends Controller
     	return view('admin.profile');
     }
 
+    public function tutorial(){
+        $tutorial = Tutorial::orderBy('id', 'DESC')->first();
+        return view('admin.tutorial.index', compact('tutorial'));
+    }
+
+    public function addTutorial(Request $request){
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+        $data = $request->all();
+
+        $tutorial = Tutorial::orderBy('id', 'DESC')->limit(1)->get();
+
+        if(count($tutorial) > 0){
+            $id = $tutorial[0]->id;
+            $tutorial = Tutorial::findorfail($id);
+            $tutorial->update($data);        
+            return redirect('admin/tutorial')->withType('success')->withMessage('Tutorial Updated');
+        }
+        else{
+            $tutorial = new Tutorial($data);        
+            $tutorial->save();
+            return redirect('admin/tutorial')->withType('success')->withMessage('Tutorial Added');
+        }        
+    }
+
     public function notification(){
         return view('admin.notification');
     }
 
     public function sendNotification(Request $request){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
         $key = env("FIREBASE_API_SERVER_KEY", "");
 
         if(!empty($key)){
@@ -122,15 +146,43 @@ class PagesController extends Controller
 
     public function apiShowCategories(){
         $categories = Category::withCount(['question'=>function($q) {
-                        return $q->where('status', 1);
-                    }])->orderBy('title', 'ASC')->withCount('children')->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', null)->get();
+                return $q->where('status', 1);
+            }])->orderBy('position', 'ASC')->withCount('children')->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', null)->get();
+        return $categories;
+    }
+
+    public function apiShowCategoriesPremium(){
+        $categories = Category::withCount(['question'=>function($q) {
+            return $q->where('status', 1);
+        }])->orderBy('position', 'ASC')->withCount('children')->orderBy('title', 'ASC')->where('paid', 1)->where('status', 1)->where('parent_id', null)->get();   
+        return $categories;
+    }
+
+    public function apiShowCategoriesFree(){
+        $categories = Category::withCount(['question'=>function($q) {
+            return $q->where('status', 1);
+        }])->orderBy('position', 'ASC')->withCount('children')->orderBy('title', 'ASC')->where('paid', 0)->where('status', 1)->where('parent_id', null)->get();   
         return $categories;
     }
 
     public function apiShowChildCategories($id){
         $categories = Category::withCount(['question'=>function($q) {
                         return $q->where('status', 1);
-                    }])->withCount('children')->orderBy('title', 'ASC')->where('status', 1)->where('parent_id', $id)->get();
+                    }])->withCount('children')->orderBy('position', 'ASC')->where('status', 1)->where('parent_id', $id)->get();
+        return $categories;
+    }
+
+    public function apiShowChildCategoriesPremium($id){
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->withCount('children')->orderBy('position', 'ASC')->where('paid', 1)->where('status', 1)->where('parent_id', $id)->get();
+        return $categories;
+    }
+
+    public function apiShowChildCategoriesFree($id){
+        $categories = Category::withCount(['question'=>function($q) {
+                        return $q->where('status', 1);
+                    }])->withCount('children')->orderBy('position', 'ASC')->where('paid', 0)->where('status', 1)->where('parent_id', $id)->get();
         return $categories;
     }
 
@@ -152,5 +204,10 @@ class PagesController extends Controller
     public function apiShowSingleQuestion($id){
         $question = Question::findorfail($id)->get();      
         return $question;
+    }
+
+    public function apiShowTutorial(){
+        $tutorial = Tutorial::orderBy('id', 'DESC')->first();
+        return $tutorial;
     }
 }

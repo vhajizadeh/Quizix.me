@@ -19,7 +19,10 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->text('description');
             $table->string('thumbnail')->nullable(); 
-            $table->tinyInteger('quick')->nullable()->default(0);           
+            $table->tinyInteger('quick')->nullable()->default(0);                       
+            $table->integer('limit_questions')->nullable();
+            $table->integer('position')->nullable();
+            $table->tinyInteger('paid')->nullable()->default(0);    
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

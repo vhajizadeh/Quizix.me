@@ -18,8 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('categories', 'PagesController@apiShowCategories');
+Route::get('categories/premium', 'PagesController@apiShowCategoriesPremium');
+Route::get('categories/free', 'PagesController@apiShowCategoriesFree');
+
 Route::get('categories/{id}', 'PagesController@apiShowChildCategories');
+Route::get('categories/{id}/premium', 'PagesController@apiShowChildCategoriesPremium');
+Route::get('categories/{id}/free', 'PagesController@apiShowChildCategoriesFree');
+
 Route::get('category/{id}', 'PagesController@apiShowSingleCategory');
 Route::get('category/{id}/questions', 'PagesController@apiShowSingleCategoryQuestion');
 Route::get('questions', 'PagesController@apiShowQuestions');
 Route::get('question/{id}', 'PagesController@apiShowSingleQuestion');
+Route::get('tutorial', 'PagesController@apiShowTutorial');

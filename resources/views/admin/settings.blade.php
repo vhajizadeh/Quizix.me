@@ -72,13 +72,33 @@
                             <th>Type</th>
                         </tr>
                         <tr>
-                            <td>Get all Categories(First Level)</td>
+                            <td>Get all Categories(First Level/No Child, Free + Premium)</td>
                             <td>{{ url('/') }}/api/categories</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get all Categories(First Level/No Child, Free)</td>
+                            <td>{{ url('/') }}/api/categories/free</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get all Categories(First Level/No Child, Premium)</td>
+                            <td>{{ url('/') }}/api/categories/premium</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>
                             <td>Get all Child Categories of a Category</td>
                             <td>{{ url('/') }}/api/categories/{id}</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get all Child Categories of a Category(Free)</td>
+                            <td>{{ url('/') }}/api/categories/{id}/free</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get all Child Categories of a Category(Premium)</td>
+                            <td>{{ url('/') }}/api/categories/{id}/premium</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>
@@ -99,6 +119,11 @@
                         <tr>
                             <td>Get single Question</td>
                             <td>{{ url('/') }}/api/question/{id}</td>
+                            <td><span class="label label-success">GET</span></td>
+                        </tr>
+                        <tr>
+                            <td>Get Tutorial</td>
+                            <td>{{ url('/') }}/api/tutorial</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                     </table>

@@ -18,12 +18,16 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function() {
     Route::get('dashboard', 'PagesController@dashboard')->name('dashboard');
     Route::get('category/status/{id}/{status}', 'CategoryController@status')->name('categoryStatus');
+    Route::get('category/order', 'CategoryController@order')->name('categoryOrder');
+    Route::post('category/chnageOrder', 'CategoryController@chnageOrder')->name('categoryChangeOrder');
     Route::resource('category', 'CategoryController');
     Route::get('question/status/{id}/{status}', 'QuestionController@status')->name('questionStatus');
     Route::resource('question', 'QuestionController');
     Route::get('setting', 'PagesController@settings')->name('setting');
     Route::get('profile', 'PagesController@profile')->name('profile');
     Route::get('notification', 'PagesController@notification')->name('notification');
+    Route::get('tutorial', 'PagesController@tutorial')->name('tutorial');
+    Route::post('addTutorial', 'PagesController@addTutorial')->name('addTutorial');
 
     Route::post('sendNotification', 'PagesController@sendNotification')->name('sendNotification');
 

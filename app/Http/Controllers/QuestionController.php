@@ -59,19 +59,32 @@ class QuestionController extends Controller
 
         $data = $request->all();
          
-        $data['choice_a'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
-        $data['choice_b'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        $choice_a = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
+        $data['choice_a'] = preg_replace('/(<br>)+$/', '', $choice_a);
+        
+        $choice_b = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        $data['choice_b'] = preg_replace('/(<br>)+$/', '', $choice_b);
+        
         if($data['choice_c'] != null){
-            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+            $choice_c = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+            $data['choice_c'] = preg_replace('/(<br>)+$/', '', $choice_c);
         }
-        if($data['choice_c'] != null){
-            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+        
+        if($data['choice_d'] != null){
+            $choice_d = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+            $data['choice_d'] = preg_replace('/(<br>)+$/', '', $choice_d);
         }
-        $data['title'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        
+        $title = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        $data['title'] = preg_replace('/(<br>)+$/', '', $title);
+        
         if($data['explanation'] != null){
-            $data['explanation'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+            $explanation = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+            $data['explanation'] = preg_replace('/(<br>)+$/', '', $explanation);
         }
-        $data['answer'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1));   
+        
+        $answer = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1)); 
+        $data['answer'] = preg_replace('/(<br>)+$/', '', $answer);    
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');
@@ -144,19 +157,32 @@ class QuestionController extends Controller
         $question = Question::findorfail($id);
         $data = $request->all(); 
 
-        $data['choice_a'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
-        $data['choice_b'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        $choice_a = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
+        $data['choice_a'] = preg_replace('/(<br>)+$/', '', $choice_a);
+        
+        $choice_b = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
+        $data['choice_b'] = preg_replace('/(<br>)+$/', '', $choice_b);
+        
         if($data['choice_c'] != null){
-            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+            $choice_c = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
+            $data['choice_c'] = preg_replace('/(<br>)+$/', '', $choice_c);
         }
-        if($data['choice_c'] != null){
-            $data['choice_c'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+        
+        if($data['choice_d'] != null){
+            $choice_d = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
+            $data['choice_d'] = preg_replace('/(<br>)+$/', '', $choice_d);
         }
-        $data['title'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        
+        $title = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
+        $data['title'] = preg_replace('/(<br>)+$/', '', $title);
+        
         if($data['explanation'] != null){
-            $data['explanation'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+            $explanation = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
+            $data['explanation'] = preg_replace('/(<br>)+$/', '', $explanation);
         }
-        $data['answer'] = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1));   
+        
+        $answer = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1)); 
+        $data['answer'] = preg_replace('/(<br>)+$/', '', $answer);  
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');

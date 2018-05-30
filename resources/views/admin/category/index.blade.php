@@ -27,6 +27,7 @@
             <div class="panel">                
                 <header class="panel-heading">
                     Categories
+                    <a href="{{ Route('categoryOrder') }}" class="btn btn-danger pull-right" style="position: relative;top: -7px;right: 0;">Change Category Order</a>
                     <a href="{{ Route('category.create') }}" class="btn btn-primary pull-right" style="position: relative;top: -7px;right: 10px;">Add New</a>
                 </header>
                 <div class="panel-body table-responsive">
@@ -41,7 +42,9 @@
                             <th>Quetions</th>
                             <th>Thumbnail</th>
                             <th>Added On</th>
+                            <th>Paid</th>
                             <th>Status</th>
+                            <th>Position</th>
                             <th>Action</th>
                         </tr>
                         @foreach($categories as $key => $category)
@@ -54,10 +57,14 @@
                             <td>
                                 @if($category->thumbnail)
                                     <img src="{{ '../uploads/category/' . $category->thumbnail }}" alt="{{ $category->title }}" class="img-responsive" style="max-width: 100px !important;height: auto;" />
+                                @else
+                                    N/A
                                 @endif
                             </td>
                             <td>{{ $category->created_at->diffForHumans() }}</td>
+                            <td>{!! $category->paid == 1 ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>' !!}</td>
                             <td>{!! $category->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>
+                            <td>{{ $category->position }}</td>
                             <td>
                                 <a href="{{ Route('categoryStatus', ['id' => $category->id, 'status' => $category->status]) }}"><button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Change Status"><i class="fa fa-check"></i></button></a>
                                 <a href="{{ Route('category.edit', $category->id) }}"><button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Edit"><i class="fa fa-pencil"></i></button></a>
