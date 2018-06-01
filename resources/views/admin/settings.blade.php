@@ -14,49 +14,6 @@
         </div>
     </div>      
 
-    {{-- <div class="row">
-        <div class="col-md-2">
-	        <div class="stat">
-	            <div class="stat-icon" style="color:#fa8564;">
-	                <i class="fa fa-star-o fa-3x stat-elem"></i>
-	            </div>
-	            <h5 class="stat-info">Score per Correct Answer- <strong>10</strong></h5>
-	        </div>
-	    </div>
-	    <div class="col-md-2">
-	        <div class="stat">
-	            <div class="stat-icon" style="color:#45cf95;">
-	                <i class="fa fa-clock-o fa-3x stat-elem"></i>
-	            </div>
-	            <h5 class="stat-info">Show Countdown Timer- <strong>Yes</strong></h5>
-	        </div>
-	    </div>
-	    <div class="col-md-3">
-	        <div class="stat">
-	            <div class="stat-icon" style="color:#AC75F0">
-	                <i class="fa fa-lock fa-3x stat-elem"></i>
-	            </div>
-	            <h5 class="stat-info">Countdown Timer Duration- <strong>30 Seconds</strong></h5>
-	        </div>
-	    </div>
-	    <div class="col-md-2">
-	        <div class="stat">
-	            <div class="stat-icon" style="color:#45cf95;">
-	                <i class="fa fa-arrow-right fa-3x stat-elem"></i>
-	            </div>
-	            <h5 class="stat-info">Skip Button- <strong>Yes</strong></h5>
-	        </div>
-	    </div>
-	    <div class="col-md-2">
-	        <div class="stat">
-	            <div class="stat-icon" style="color:#AC75F0">
-	                <i class="fa fa-dollar fa-3x stat-elem"></i>
-	            </div>
-	            <h5 class="stat-info">AdMob- <strong>On</strong></h5>
-	        </div>
-	    </div>
-	</div>   --}}
-
 	<div class="row">
         <div class="col-xs-12">
             <div class="panel">
@@ -73,7 +30,7 @@
                         </tr>
                         <tr>
                             <td>Get all Categories(First Level/No Child, Free + Premium)</td>
-                            <td>{{ url('/') }}/api/categories</td>
+                            <td>{{ url('/') }}/api/categories/all</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>
@@ -88,7 +45,7 @@
                         </tr>
                         <tr>
                             <td>Get all Child Categories of a Category</td>
-                            <td>{{ url('/') }}/api/categories/{id}</td>
+                            <td>{{ url('/') }}/api/categories/{id}/all</td>
                             <td><span class="label label-success">GET</span></td>
                         </tr>
                         <tr>

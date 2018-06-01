@@ -17,11 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('categories', 'PagesController@apiShowCategories');
+Route::get('categories/all', 'PagesController@apiShowCategories');
 Route::get('categories/premium', 'PagesController@apiShowCategoriesPremium');
 Route::get('categories/free', 'PagesController@apiShowCategoriesFree');
 
-Route::get('categories/{id}', 'PagesController@apiShowChildCategories');
+Route::get('categories/{id}/all', 'PagesController@apiShowChildCategories');
 Route::get('categories/{id}/premium', 'PagesController@apiShowChildCategoriesPremium');
 Route::get('categories/{id}/free', 'PagesController@apiShowChildCategoriesFree');
 
