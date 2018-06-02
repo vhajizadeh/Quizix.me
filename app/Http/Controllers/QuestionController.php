@@ -23,6 +23,20 @@ class QuestionController extends Controller
         return view('admin.question.index', compact('questions', 'categories'));
     }
 
+    // Remove Unnecessary HTML or Space
+    public function format_html_string($content){
+        $remove_tags = trim(strip_tags($content, '<sub><sup>'));   
+        $output = preg_replace('~
+         (?>
+            <(\w++)[^>]*+>(?>\s++|&nbsp;|<br\s*+/?>)*</\1>  # empty tags
+           |                                                # OR
+            (?>\s++|&nbsp;|<br\s*+/?>)+                     # white spaces, br, &nbsp;
+         )+$
+                        ~xi', '', $remove_tags);  
+
+        return $output;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,32 +75,20 @@ class QuestionController extends Controller
 
         $data = $request->all();
          
-        $choice_a = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
-        $data['choice_a'] = preg_replace('/(<br>)+$/', '', $choice_a);
-        
-        $choice_b = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
-        $data['choice_b'] = preg_replace('/(<br>)+$/', '', $choice_b);
+        $data['title'] = $this->format_html_string($data['title']); 
+        $data['choice_a'] = $this->format_html_string($data['choice_a']); 
+        $data['choice_b'] = $this->format_html_string($data['choice_b']);       
         
         if($data['choice_c'] != null){
-            $choice_c = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
-            $data['choice_c'] = preg_replace('/(<br>)+$/', '', $choice_c);
-        }
-        
+             $data['choice_c'] = $this->format_html_string($data['choice_c']); 
+        }        
         if($data['choice_d'] != null){
-            $choice_d = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
-            $data['choice_d'] = preg_replace('/(<br>)+$/', '', $choice_d);
-        }
-        
-        $title = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
-        $data['title'] = preg_replace('/(<br>)+$/', '', $title);
-        
+             $data['choice_d'] = $this->format_html_string($data['choice_d']); 
+        }        
         if($data['explanation'] != null){
-            $explanation = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
-            $data['explanation'] = preg_replace('/(<br>)+$/', '', $explanation);
-        }
-        
-        $answer = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1)); 
-        $data['answer'] = preg_replace('/(<br>)+$/', '', $answer);    
+            $data['explanation'] = $this->format_html_string($data['explanation']); 
+        }        
+        $data['answer'] = $this->format_html_string($data[$data['answer']]); 
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');
@@ -156,32 +158,20 @@ class QuestionController extends Controller
         $question = Question::findorfail($id);
         $data = $request->all(); 
 
-        $choice_a = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_a'], 1));
-        $data['choice_a'] = preg_replace('/(<br>)+$/', '', $choice_a);
-        
-        $choice_b = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_b'], 1));
-        $data['choice_b'] = preg_replace('/(<br>)+$/', '', $choice_b);
+        $data['title'] = $this->format_html_string($data['title']); 
+        $data['choice_a'] = $this->format_html_string($data['choice_a']); 
+        $data['choice_b'] = $this->format_html_string($data['choice_b']);       
         
         if($data['choice_c'] != null){
-            $choice_c = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_c'], 1));
-            $data['choice_c'] = preg_replace('/(<br>)+$/', '', $choice_c);
-        }
-        
+             $data['choice_c'] = $this->format_html_string($data['choice_c']); 
+        }        
         if($data['choice_d'] != null){
-            $choice_d = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['choice_d'], 1));
-            $data['choice_d'] = preg_replace('/(<br>)+$/', '', $choice_d);
-        }
-        
-        $title = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['title'], 1));
-        $data['title'] = preg_replace('/(<br>)+$/', '', $title);
-        
+             $data['choice_d'] = $this->format_html_string($data['choice_d']); 
+        }        
         if($data['explanation'] != null){
-            $explanation = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data['explanation'], 1));
-            $data['explanation'] = preg_replace('/(<br>)+$/', '', $explanation);
-        }
-        
-        $answer = trim(preg_replace('~<p>(.*?)</p>~is', '$1', $data[$data['answer']], 1)); 
-        $data['answer'] = preg_replace('/(<br>)+$/', '', $answer);  
+            $data['explanation'] = $this->format_html_string($data['explanation']); 
+        }      
+        $data['answer'] = $this->format_html_string($data[$data['answer']]); 
 
         if($request->file('thumbnail')){
             $file = $request->file('thumbnail');
