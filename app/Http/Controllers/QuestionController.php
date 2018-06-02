@@ -42,7 +42,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $host_type = env("HOSTING_TYPE", "shared");
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
 
         $this->validate($request, [
             'title' => 'required',
@@ -90,12 +92,7 @@ class QuestionController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            if($host_type == 'shared'){
-                $file->move(base_path() . '/uploads/question/', $name); 
-            }
-            else{
-                $file->move(base_path() . '/public/uploads/question/', $name); 
-            }
+            $file->move(base_path() . '/uploads/question/', $name); 
             $data['thumbnail'] = $name;            
         } 
 
@@ -139,7 +136,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $host_type = env("HOSTING_TYPE", "shared");
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
 
         $this->validate($request, [
             'title' => 'required',
@@ -188,12 +187,7 @@ class QuestionController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            if($host_type == 'shared'){
-                $file->move(base_path() . '/uploads/question/', $name); 
-            }
-            else{
-                $file->move(base_path() . '/public/uploads/question/', $name); 
-            }
+            $file->move(base_path() . '/uploads/question/', $name); 
             $data['thumbnail'] = $name;         
         } 
         
@@ -209,6 +203,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $question = Question::findorfail($id);
         $question->destroy($id);
         return redirect('admin/question')->withType('danger')->withMessage('Question Deleted');
@@ -222,6 +219,9 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function status($id, $status){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
         $question = Question::findorfail($id);
         if($status == 0){
             $data['status'] = 1;

@@ -61,16 +61,6 @@
       <!-- Custom Script -->  
       <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-      <script>
-         $(document).ready(function() {
-            $('.input-editor').summernote({
-               toolbar: [
-                  ['font', ['superscript', 'subscript']],
-               ]
-            });
-         });
-      </script>
-
       @stack('scripts')
 
    </body>

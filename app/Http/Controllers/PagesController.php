@@ -35,6 +35,10 @@ class PagesController extends Controller
     }
 
     public function addTutorial(Request $request){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }
+
         $this->validate($request, [
             'content' => 'required',
         ]);
@@ -107,6 +111,7 @@ class PagesController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
+
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -126,6 +131,7 @@ class PagesController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
+        
         $this->validate($request, [
             'uname' => 'required|string|max:255',
             'uemail' => 'required|string|email|max:255',

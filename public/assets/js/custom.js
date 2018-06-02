@@ -60,7 +60,4 @@ jQuery(document).ready(function(){
   else if(choice == 3){
     $("#answer option[value='choice_d']").remove();
   }
-  else{
-    
-  }
 });

@@ -43,7 +43,6 @@ class CategoryController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
-        $host_type = env("HOSTING_TYPE", "shared");
 
         $this->validate($request, [
             'title' => 'required',
@@ -60,12 +59,7 @@ class CategoryController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            if($host_type == 'shared'){
-                $file->move(base_path() . '/uploads/category/', $name); 
-            }
-            else{
-                $file->move(base_path() . '/public/uploads/category/', $name); 
-            }
+            $file->move(base_path() . '/uploads/category/', $name); 
             $data['thumbnail'] = $name;            
         }        
 
@@ -110,7 +104,6 @@ class CategoryController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
-        $host_type = env("HOSTING_TYPE", "shared");
 
         $this->validate($request, [
             'title' => 'required',
@@ -128,12 +121,7 @@ class CategoryController extends Controller
             $file = $request->file('thumbnail');
             $mimes = $file->getClientMimeType();
             $name = time() . '.' . $file->getClientOriginalExtension();
-            if($host_type == 'shared'){
-                $file->move(base_path() . '/uploads/category/', $name); 
-            }
-            else{
-                $file->move(base_path() . '/public/uploads/category/', $name); 
-            }
+            $file->move(base_path() . '/uploads/category/', $name); 
             $data['thumbnail'] = $name;   
         }
         
@@ -152,6 +140,7 @@ class CategoryController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
+
         $category = Category::findorfail($id);
         $category->destroy($id);
         $category->question()->update(['status' => 0]);
@@ -169,6 +158,7 @@ class CategoryController extends Controller
         if(Auth::user()->email != 'arifkpi@gmail.com'){
             return 'Add/Edit/Delete disabled on Demo!';
         }
+
         $category = Category::findorfail($id);
         if($status == 0){
             $data['status'] = 1;

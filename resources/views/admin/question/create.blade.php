@@ -39,12 +39,28 @@
 
 @push('styles')
    <style>
-      /* Page Specific Custom Style Here */
+      @if(env("MATH_QUESTION", "no") == 'no')
+        textarea.form-control {
+            height: 34px;
+        }
+
+        textarea#title {
+            height: 68px;
+        }
+      @endif
    </style>
 @endpush
 
 @push('scripts')
    <script>
-      // Page Specific Custom Script Here 
+      @if(env("MATH_QUESTION", "no") == 'yes')
+       $(document).ready(function() {
+          $('.input-editor').summernote({
+             toolbar: [
+                ['font', ['superscript', 'subscript']],
+             ]
+          });
+       });
+      @endif
    </script>
 @endpush
