@@ -28,17 +28,33 @@ jQuery(document).ready(function(){
       } else if ( $(this).val() == 2 ) {
         $('.choice_c').fadeOut();
         $('.choice_d').fadeOut();
+        $('.choice_e').fadeOut();
         $("#answer option[value='choice_c']").remove();
         $("#answer option[value='choice_d']").remove();
       }
       else if( $(this).val() == 4 ){
         $('.choice_c').fadeIn();
         $('.choice_d').fadeIn();
+        $('.choice_e').fadeOut();
         if($("#answer option[value='choice_c']").length == 0){
           $("#answer").append('<option value="choice_c">Choice C</option>');
         } 
         if($("#answer option[value='choice_d']").length == 0){
           $("#answer").append('<option value="choice_d">Choice D</option>');
+        }
+      }
+      else if( $(this).val() == 5 ){
+        $('.choice_c').fadeIn();
+        $('.choice_d').fadeIn();
+        $('.choice_e').fadeIn();
+        if($("#answer option[value='choice_c']").length == 0){
+          $("#answer").append('<option value="choice_c">Choice C</option>');
+        } 
+        if($("#answer option[value='choice_d']").length == 0){
+          $("#answer").append('<option value="choice_d">Choice D</option>');
+        }
+        if($("#answer option[value='choice_e']").length == 0){
+          $("#answer").append('<option value="choice_e">Choice E</option>');
         }
       }
   });
@@ -52,12 +68,19 @@ jQuery(document).ready(function(){
       }
   });
 
-  var choice = $('#number_of_answer').find(":selected").text();
-  if(choice == 2){
-    $("#answer option[value='choice_c']").remove();
-    $("#answer option[value='choice_d']").remove();
-  }
-  else if(choice == 3){
-    $("#answer option[value='choice_d']").remove();
-  }
+  $('#number_of_answer').change(function(e) {
+    var choice = $('#number_of_answer').find(":selected").text();
+    if(choice == 2){
+      $("#answer option[value='choice_c']").remove();
+      $("#answer option[value='choice_d']").remove();
+      $("#answer option[value='choice_e']").remove();
+    }
+    else if(choice == 3){
+      $("#answer option[value='choice_d']").remove();
+      $("#answer option[value='choice_e']").remove();
+    }
+    else if(choice == 4){
+      $("#answer option[value='choice_e']").remove();
+    }
+  });
 });

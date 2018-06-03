@@ -69,7 +69,8 @@ class QuestionController extends Controller
             'choice_a' => 'required',
             'choice_b' => 'required',
             'choice_c' => 'required_if:number_of_answer,3|required_if:number_of_answer,4',
-            'choice_d' => 'required_if:number_of_answer,4',            
+            'choice_d' => 'required_if:number_of_answer,4|required_if:number_of_answer,5',
+            'choice_e' => 'required_if:number_of_answer,5',          
             'answer' => 'required',
         ]);             
 
@@ -84,6 +85,9 @@ class QuestionController extends Controller
         }        
         if($data['choice_d'] != null){
              $data['choice_d'] = $this->format_html_string($data['choice_d']); 
+        }  
+        if($data['choice_e'] != null){
+             $data['choice_e'] = $this->format_html_string($data['choice_e']); 
         }        
         if($data['explanation'] != null){
             $data['explanation'] = $this->format_html_string($data['explanation']); 
@@ -151,7 +155,8 @@ class QuestionController extends Controller
             'choice_a' => 'required',
             'choice_b' => 'required',
             'choice_c' => 'required_if:number_of_answer,3|required_if:number_of_answer,4',
-            'choice_d' => 'required_if:number_of_answer,4',            
+            'choice_d' => 'required_if:number_of_answer,4|required_if:number_of_answer,5',
+            'choice_e' => 'required_if:number_of_answer,5',             
             'answer' => 'required',
         ]);             
 
@@ -168,6 +173,9 @@ class QuestionController extends Controller
         if($data['choice_d'] != null){
              $data['choice_d'] = $this->format_html_string($data['choice_d']); 
         }        
+        if($data['choice_e'] != null){
+             $data['choice_e'] = $this->format_html_string($data['choice_e']); 
+        } 
         if($data['explanation'] != null){
             $data['explanation'] = $this->format_html_string($data['explanation']); 
         }      

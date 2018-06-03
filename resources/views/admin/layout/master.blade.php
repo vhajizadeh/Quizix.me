@@ -57,7 +57,7 @@
       <!-- Summernote -->
       <script src="{{ asset('assets/js/summernote.js') }}"></script>
       <!-- Custom Script -->  
-      <script src="{{ asset('assets/js/custom.js') }}"></script>
+      <script src="{{ asset('assets/js/main.js') }}"></script>
 
       @stack('scripts')
 

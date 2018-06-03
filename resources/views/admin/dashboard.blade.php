@@ -22,24 +22,6 @@
             </div>
          </div>
       </div>
-        {{-- <div class="col-md-3">
-         <div class="sm-st clearfix">
-            <span class="sm-st-icon st-green"><i class="fa fa-star"></i></span>
-            <div class="sm-st-info">
-               <span>10</span>
-               Score per Correct Answer
-            </div>
-         </div>
-      </div>
-      <div class="col-md-3">
-         <div class="sm-st clearfix">
-            <span class="sm-st-icon st-red"><i class="fa fa-clock-o"></i></span>
-            <div class="sm-st-info">
-               <span>On</span>
-               Countdown Timer
-            </div>
-         </div>
-      </div> --}}
    </div>
    <!-- Main row -->
    <div class="row">
@@ -100,6 +82,7 @@
                             <th>Choice B</th>
                             <th>Choice C</th>
                             <th>Choice D</th>
+                            <th>Choice E</th>
                             <th>Answer</th>
                             <th>Added On</th>
                             <th>Status</th>
@@ -118,7 +101,8 @@
                             <td>{!! $question->choice_a !!}</td> 
                             <td>{!! $question->choice_b !!}</td>  
                             <td>{!! $question->choice_c ? $question->choice_c : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
-                            <td>{!! $question->choice_d ? $question->choice_d : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
+                            <td>{!! $question->choice_d ? $question->choice_d : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td> 
+                            <td>{!! $question->choice_e ? $question->choice_e : '<span class="badge badge-dark" style="padding: 5px 10px;">N/A</span>' !!}</td>  
                             <td>{!! $question->answer !!}</td>     
                             <td>{{ $question->created_at->diffForHumans() }}</td>                      
                             <td>{!! $question->status == 1 ? '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>' !!}</td>                            

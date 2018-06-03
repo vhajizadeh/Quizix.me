@@ -24,6 +24,7 @@ class CreateQuestionsTable extends Migration
             $table->text('choice_b');
             $table->text('choice_c')->nullable();
             $table->text('choice_d')->nullable();
+            $table->text('choice_e')->nullable();
             $table->string('answer');
             $table->text('explanation')->nullable();
             $table->tinyInteger('status')->default(1);

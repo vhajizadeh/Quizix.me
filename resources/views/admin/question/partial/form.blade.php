@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('number_of_answer', 'Number of Answer'); !!}
-            {!! Form::select('number_of_answer', ['4' => '4', '3' => '3', '2' => '2'], null, ['id' => 'number_of_answer', 'class' => 'form-control']); !!}
+            {!! Form::select('number_of_answer', ['5' => '5', '4' => '4', '3' => '3', '2' => '2'], null, ['id' => 'number_of_answer', 'class' => 'form-control']); !!}
         </div>        
         <div class="form-group">
             {!! Form::label('choice_a', 'Choice A'); !!}
@@ -41,6 +41,10 @@
             {!! Form::label('choice_d', 'Choice D'); !!}
             {{ Form::textarea('choice_d', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice D', 'size' => '30x2']) }}
         </div>
+        <div class="form-group choice_e" style="{{ isset($question) && ($question->number_of_answer == 2 || $question->number_of_answer == 3|| $question->number_of_answer == 4) ? 'display: none;' : 'display: block;' }}">
+            {!! Form::label('choice_e', 'Choice E'); !!}
+            {{ Form::textarea('choice_e', null, ['class' => 'form-control input-editor', 'placeholder' => 'Choice E', 'size' => '30x2']) }}
+        </div>
         @php
             if(isset($question)){
                 switch($question->answer){
@@ -56,6 +60,9 @@
                     case $question->choice_d:
                         $answer_choice = 'choice_d';
                         break;
+                    case $question->choice_e:
+                        $answer_choice = 'choice_e';
+                        break;
                     default:
                         $answer_choice = 'choice_a';
                         break;
@@ -67,7 +74,7 @@
         @endphp
         <div class="form-group">
             {!! Form::label('answer', 'Correct Answer'); !!}
-            {!! Form::select('answer', ['choice_a' => 'Choice A', 'choice_b' => 'Choice B', 'choice_c' => 'Choice C', 'choice_d' => 'Choice D'], $answer_choice, ['id' => 'answer', 'class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
+            {!! Form::select('answer', ['choice_a' => 'Choice A', 'choice_b' => 'Choice B', 'choice_c' => 'Choice C', 'choice_d' => 'Choice D', 'choice_e' => 'Choice E'], $answer_choice, ['id' => 'answer', 'class' => 'form-control', 'placeholder' => 'Correct Answer']); !!}
         </div>
         <div class="form-group">
             {!! Form::label('explanation', 'Answer Explanation'); !!}
