@@ -32,6 +32,11 @@
             <i class="fa fa-bell"></i> <span>Push Notification</span>
             </a>
          </li>
+         <li class="{{ Request::segment(2) === 'upload' ? 'active' : '' }}">
+            <a href="{{ Route('upload') }}">
+            <i class="fa fa-upload"></i> <span>Bulk Upload</span>
+            </a>
+         </li>
       </ul>
    </section>
    <!-- /.sidebar -->

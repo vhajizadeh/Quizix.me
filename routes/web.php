@@ -26,10 +26,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function() {
     Route::get('setting', 'PagesController@settings')->name('setting');
     Route::get('profile', 'PagesController@profile')->name('profile');
     Route::get('notification', 'PagesController@notification')->name('notification');
+    Route::post('sendNotification', 'PagesController@sendNotification')->name('sendNotification');
     Route::get('tutorial', 'PagesController@tutorial')->name('tutorial');
     Route::post('addTutorial', 'PagesController@addTutorial')->name('addTutorial');
-
-    Route::post('sendNotification', 'PagesController@sendNotification')->name('sendNotification');
+    Route::get('upload', 'PagesController@upload')->name('upload');
+    Route::post('uploadData', 'PagesController@uploadData')->name('uploadData');
+    
 
     Route::post('createUser', 'PagesController@createUser')->name('createUser');
     Route::post('updatePassword', 'PagesController@updatePassword')->name('updatePassword');

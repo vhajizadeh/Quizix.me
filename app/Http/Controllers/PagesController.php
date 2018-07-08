@@ -9,6 +9,7 @@ use Route;
 use App\User;
 use Auth;
 use App\Tutorial;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PagesController extends Controller
 {
@@ -61,6 +62,69 @@ class PagesController extends Controller
 
     public function notification(){
         return view('admin.notification');
+    }
+
+    public function upload(){
+        $categories = Category::where('status', 1)->pluck('title', 'id');
+        return view('admin.upload', compact('categories'));
+    }
+
+    public function uploadData(Request $request){
+        if(Auth::user()->email != 'arifkpi@gmail.com'){
+            return 'Add/Edit/Delete disabled on Demo!';
+        }        
+
+        $this->validate($request, [
+            'category_id' => 'required',
+            'upload_file' => 'required'
+        ]);    
+
+        $data = $request->all();        
+        \Session::put('category_id', $data['category_id']);
+
+        if($request->file('upload_file')){
+            $file = $request->file('upload_file');
+            $mimes = $file->getClientMimeType();
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/uploads/bulkupload/', $name); 
+            $data['upload_file'] = base_path() . '/uploads/bulkupload/' . $name;          
+        }    
+
+        try {
+            Excel::load($data['upload_file'], function ($reader) {
+                $cat_id = \Session::get('category_id');
+
+                foreach ($reader->toArray() as $key => $question) {   
+                    $number_of_answer = 0;
+                    if(!empty($question['choice_a'])){
+                        $number_of_answer++;
+                    }
+                    if(!empty($question['choice_b'])){
+                        $number_of_answer++;
+                    }
+                    if(!empty($question['choice_c'])){
+                        $number_of_answer++;
+                    }
+                    if(!empty($question['choice_d'])){
+                        $number_of_answer++;
+                    }
+                    if(!empty($question['choice_e'])){
+                        $number_of_answer++;
+                    }
+                    $question['number_of_answer'] = $number_of_answer;
+                    $question['category_id'] = $cat_id;
+
+                    $question = new Question($question);        
+                    $question->save();
+                }
+            });
+
+            unlink($data['upload_file']);
+            return redirect('admin/upload')->withType('success')->withMessage('Questions Data Added');   
+        }
+        catch(\Exception $e){
+            return redirect('admin/upload')->withType('danger')->withMessage($e->getMessage());   
+        }
     }
 
     public function sendNotification(Request $request){
