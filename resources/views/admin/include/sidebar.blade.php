@@ -21,12 +21,12 @@
             <a href="{{ Route('tutorial') }}">
             <i class="fa fa-book"></i> <span>Tutorial</span>
             </a>
-         </li>
-         <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
-            <a href="{{ Route('setting') }}">
-            <i class="fa fa-cog"></i> <span>Settings</span>
+         </li> 
+         <li class="{{ Request::segment(2) === 'gdpr' ? 'active' : '' }}">
+            <a href="{{ Route('gdpr') }}">
+            <i class="fa fa-lock"></i> <span>GDPR</span>
             </a>
-         </li>
+         </li>          
          <li class="{{ Request::segment(2) === 'notification' ? 'active' : '' }}">
             <a href="{{ Route('notification') }}">
             <i class="fa fa-bell"></i> <span>Push Notification</span>
@@ -35,6 +35,11 @@
          <li class="{{ Request::segment(2) === 'upload' ? 'active' : '' }}">
             <a href="{{ Route('upload') }}">
             <i class="fa fa-upload"></i> <span>Bulk Upload</span>
+            </a>
+         </li>
+         <li class="{{ Request::segment(2) === 'setting' ? 'active' : '' }}">
+            <a href="{{ Route('setting') }}">
+            <i class="fa fa-cog"></i> <span>Settings</span>
             </a>
          </li>
       </ul>

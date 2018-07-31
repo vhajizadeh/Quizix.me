@@ -40,10 +40,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -101,10 +97,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -137,10 +129,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $category = Category::findorfail($id);
         $category->destroy($id);
         $category->question()->update(['status' => 0]);
@@ -148,17 +136,13 @@ class CategoryController extends Controller
     }    
 
     /**
-     * Chnage status of the specified resource from storage.
+     * Change status of the specified resource from storage.
      *
      * @param  int  $id
      * @param  int  $status
      * @return \Illuminate\Http\Response
      */
     public function status($id, $status){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $category = Category::findorfail($id);
         if($status == 0){
             $data['status'] = 1;
@@ -179,7 +163,7 @@ class CategoryController extends Controller
         return view('admin.category.order', compact('categories'));
     }
 
-    public function chnageOrder(Request $request){
+    public function changeOrder(Request $request){
         foreach($request['cat_id'] as $position => $cat){
             $category = Category::findorfail($cat);
             $data['position'] = $position + 1;             

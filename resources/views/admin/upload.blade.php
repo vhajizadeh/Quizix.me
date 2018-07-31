@@ -35,10 +35,13 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('category_id', 'Category'); !!}
-                                    {!! Form::select('category_id', $categories, null, ['class' => 'form-control']); !!}
+                                    {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Pick a Category']); !!}
                                 </div>
+                                <div class="alert alert-danger">
+                                    For Photo Questions, add the corresponding photos on- backend_root/uploads/question/
+                                </div> 
                                 <div class="alert alert-success">
-                                    Excel File - xlsx or xls format
+                                    Excel File, Format- xlsx or xls
                                 </div>   
                                 <div class="form-group">
                                     {!! Form::label('upload_file', 'File'); !!}

@@ -9,6 +9,7 @@ use Route;
 use App\User;
 use Auth;
 use App\Tutorial;
+use App\gdpr;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PagesController extends Controller
@@ -26,8 +27,14 @@ class PagesController extends Controller
     	return view('admin.settings');
     }
 
+    public function gdpr(){
+        $gdpr = gdpr::orderBy('id', 'DESC')->first();
+        return view('admin.gdpr', compact('gdpr'));
+    }
+
     public function profile(){
-    	return view('admin.profile');
+        $users = User::orderBy('id', 'DESC')->paginate(10);
+    	return view('admin.profile', compact('users'));
     }
 
     public function tutorial(){
@@ -36,10 +43,6 @@ class PagesController extends Controller
     }
 
     public function addTutorial(Request $request){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $this->validate($request, [
             'content' => 'required',
         ]);
@@ -60,6 +63,35 @@ class PagesController extends Controller
         }        
     }
 
+    public function addGdpr(Request $request){
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+        $data = $request->all();
+
+        $gdpr = gdpr::orderBy('id', 'DESC')->limit(1)->get();
+
+        if($request->file('thumbnail')){
+            $file = $request->file('thumbnail');
+            $mimes = $file->getClientMimeType();
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/uploads/gdpr/', $name); 
+            $data['thumbnail'] = $name;            
+        }  
+
+        if(count($gdpr) > 0){
+            $id = $gdpr[0]->id;
+            $gdpr = gdpr::findorfail($id);
+            $gdpr->update($data);        
+            return redirect('admin/gdpr')->withType('success')->withMessage('GDPR Updated');
+        }
+        else{
+            $gdpr = new gdpr($data);        
+            $gdpr->save();
+            return redirect('admin/gdpr')->withType('success')->withMessage('GDPR Added');
+        }        
+    }
+
     public function notification(){
         return view('admin.notification');
     }
@@ -69,11 +101,7 @@ class PagesController extends Controller
         return view('admin.upload', compact('categories'));
     }
 
-    public function uploadData(Request $request){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }        
-
+    public function uploadData(Request $request){   
         $this->validate($request, [
             'category_id' => 'required',
             'upload_file' => 'required'
@@ -113,9 +141,25 @@ class PagesController extends Controller
                     }
                     $question['number_of_answer'] = $number_of_answer;
                     $question['category_id'] = $cat_id;
+                    $question['choice_a'] = trim($question['choice_a']);
+                    $question['choice_b'] = trim($question['choice_b']);
+                    $question['choice_c'] = trim($question['choice_c']);
+                    $question['choice_d'] = trim($question['choice_d']);
+                    $question['choice_e'] = trim($question['choice_e']);
+                    $question['answer'] = trim($question['answer']);
+                    $question['thumbnail'] = trim($question['thumbnail']);
+                    $question['title'] = trim($question['title']);
+                    $question['explanation'] = trim($question['explanation']);
+                    if(!empty($question['thumbnail'])){
+                        $question['question_type'] = 'photo';
+                    }
 
-                    $question = new Question($question);        
-                    $question->save();
+                    $options = [$question['choice_a'], $question['choice_b'], $question['choice_c'], $question['choice_d'], $question['choice_e']];
+
+                    if(in_array($question['answer'], $options)){
+                        $question = new Question($question);
+                        $question->save();      
+                    }
                 }
             });
 
@@ -172,10 +216,6 @@ class PagesController extends Controller
     }
 
     public function createUser(Request $request){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -191,11 +231,7 @@ class PagesController extends Controller
         return redirect('admin/profile')->withType('success')->withMessage('User Added');
     }
 
-    public function updatePassword(Request $request){
-        if(Auth::user()->email != 'arifkpi@gmail.com'){
-            return 'Add/Edit/Delete disabled on Demo!';
-        }
-        
+    public function updatePassword(Request $request){        
         $this->validate($request, [
             'uname' => 'required|string|max:255',
             'uemail' => 'required|string|email|max:255',
@@ -212,6 +248,13 @@ class PagesController extends Controller
         
         $user->update($data);        
         return redirect('admin/profile')->withType('success')->withMessage('Profile Updated');
+    }
+
+    public function deleteUser(Request $request){
+        $data = $request->all();
+        $user = User::findorfail($data['user_id']);
+        $user->destroy($data['user_id']);
+        return redirect('admin/profile')->withType('danger')->withMessage('User Deleted');
     }
 
     public function apiShowCategories(){
@@ -272,7 +315,7 @@ class PagesController extends Controller
     }
 
     public function apiShowSingleQuestion($id){
-        $question = Question::findorfail($id)->get();      
+        $question = Question::findorfail($id);      
         return $question;
     }
 

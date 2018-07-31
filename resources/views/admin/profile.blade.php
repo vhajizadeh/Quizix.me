@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
-                <div class="panel-heading">Update Data</div>
+                <div class="panel-heading">Update User Data</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('updatePassword') }}">
@@ -158,6 +158,53 @@
             </div>
         </div>
     </div>   
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel">                
+                <header class="panel-heading">
+                    Current Users
+                </header>
+                <div class="panel-body table-responsive">
+                    @if(count($users) > 0)
+                    <div class="table-responsive">
+                    <table class="table table-hover" id="questions">
+                        <thead>                          
+                            <tr>
+                                <th>SL</th>
+                                <th>Name</th>   
+                                <th>Email Address</th>
+                                <th>Added On</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        @foreach($users as $key => $user)
+                        <tr>
+                            <td>{{ ++$key }}</td>
+                            <td>{!! $user->name !!}</td>
+                            <td>{{ $user->email }}</td>                    
+                            <td>{{ $user->created_at->diffForHumans() }}</td>
+                            <td>
+                                <form class="form-horizontal" method="POST" action="{{ route('deleteUser') }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <button data-placement="top" data-toggle="tooltip" class="btn btn-default btn-sm tooltips" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                <form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    </div>
+                    
+                    <p>&nbsp;</p>
+                    
+                    {{ $users->render() }}  
+                    @else
+                        <p><h5 style="color:#F00;">No Data</h5></p>
+                    @endif
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
 
 @endsection
 
